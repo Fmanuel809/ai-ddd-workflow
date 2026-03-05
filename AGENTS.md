@@ -7,6 +7,7 @@
 3. Challenger authority: challenger/review has stop-the-line authority and can block progression.
 4. Evidence-first decisions: decisions, risks, and tradeoffs must be traceable in artifacts.
 5. Rule precedence: this document and configured rule sources are binding.
+6. Orchestration boundary: the orchestrator coordinates pipeline execution and validation; specialist analysis is delegated to sub-agents.
 
 ## 2) OpenCode Scope Neutrality
 
@@ -117,7 +118,7 @@ Path template notation:
      - Persist state/memory in `${ARTIFACT_ROOT}/_state/*`.
      - Use configured state files.
    - `backend=engram`:
-     - Use Engram MCP tools only: 14 available tools.
+     - Use the full Engram MCP memory toolset (14 tools) when required by stage execution.
      - Do not implement custom memory APIs.
 3. If Engram is unavailable, apply `memory.fallback.if_engram_unavailable` from config.
 
@@ -134,11 +135,30 @@ Path template notation:
 2. Keep explanations minimal and operational.
 3. Prefer concise structured deliverables over narrative text.
 
-## 7) Artifact Language Policy
+## 7) Parallel Execution Policy
+
+1. Parallel execution is enabled only when `workflow.parallel_agents=true` in `ddd-config.yml`.
+2. Orchestrator must honor `workflow.max_parallel_tasks` as hard concurrency limit.
+3. Parallelization is allowed only for stage-approved agent sets defined by orchestrator policy.
+4. Stage barrier is mandatory: no next stage starts until merge + gates pass.
+5. Any failed gate in a parallel branch fails the entire stage (stop-the-line).
+
+## 8) Artifact Language Policy
 
 1. All artifacts are English by default.
 2. Exception: explicit user request or project language policy in `ddd-config.yml`.
 
-## 8) Response Language Policy
+## 9) Response Language Policy
 
 1. Agent responses must match user language.
+
+## 10) Tooling Integration Policy (Mandatory)
+
+1. Mandatory workflow tools:
+   - `todowrite`: required to create/update the execution task list for multi-step work.
+   - `todoread`: required to read current task state before advancing stages.
+   - `question`: required to collect user decisions when material ambiguity blocks safe progression.
+2. These three tools are mandatory across orchestrator and sub-agents when their trigger conditions apply.
+3. Other OpenCode tools are allowed when justified by task needs.
+4. Prefer high-efficiency tools that operate on multiple files in one operation when broad read/write updates are needed.
+5. Tool use must follow least-privilege and orchestration boundary rules.

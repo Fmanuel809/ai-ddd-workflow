@@ -48,6 +48,7 @@ Anti-scope: implementation design, bounded context design, and technology choice
 - write `artifacts/_state/open-questions.md`: unresolved material ambiguities.
 
 ### B) When memory.backend=engram
+- Use the full Engram memory toolset (14 tools) as needed; do not limit operations to a fixed subset.
 - target `engram:ddd.glossary` (topic_keys.glossary) via `mem_save` for normalized terms.
 - target `engram:ddd.domain` (topic_keys.domain) via `mem_save` for rules and actor map.
 - use `mem_context` and `mem_search` before writing to avoid duplicate observations.

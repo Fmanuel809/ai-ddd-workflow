@@ -49,6 +49,7 @@ Anti-scope: implementation coding and deployment execution.
 - write `artifacts/_state/open-questions.md`: unresolved acceptance/NFR decisions.
 
 ### B) When memory.backend=engram
+- Use the full Engram memory toolset (14 tools) as needed; do not limit operations to a fixed subset.
 - target `engram:ddd.decisions` (topic_keys.decisions) via `mem_save` for ADR summaries.
 - target `engram:ddd.project` (topic_keys.project) via `mem_save` for specification baseline.
 - use `mem_context`/`mem_search` to recover previous decisions and unresolved risks.

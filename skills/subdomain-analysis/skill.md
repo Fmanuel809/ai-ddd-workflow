@@ -46,6 +46,7 @@ Anti-scope: detailed context contracts and aggregate design.
 - write `artifacts/_state/open-questions.md`: unresolved capability ownership or strategy gaps.
 
 ### B) When memory.backend=engram
+- Use the full Engram memory toolset (14 tools) as needed; do not limit operations to a fixed subset.
 - target `engram:ddd.domain` (topic_keys.domain) via `mem_save` for subdomain definitions.
 - target `engram:ddd.decisions` (topic_keys.decisions) via `mem_save` for build-buy-reuse rationale.
 - use `mem_context`/`mem_search` for prior strategic decisions.

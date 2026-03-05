@@ -47,6 +47,7 @@ Anti-scope: subdomain strategy, bounded context contracts, and implementation ar
 - write `artifacts/_state/open-questions.md`: unresolved hotspot questions.
 
 ### B) When memory.backend=engram
+- Use the full Engram memory toolset (14 tools) as needed; do not limit operations to a fixed subset.
 - target `engram:ddd.events` (topic_keys.events) via `mem_save` for event timelines.
 - target `engram:ddd.risks` (topic_keys.risks) via `mem_save` for hotspots.
 - use `mem_context`/`mem_search` to retrieve prior event decisions.

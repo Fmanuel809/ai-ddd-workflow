@@ -46,6 +46,7 @@ Anti-scope: UI/API implementation details and deployment architecture.
 - write `artifacts/_state/open-questions.md`: unresolved model conflicts.
 
 ### B) When memory.backend=engram
+- Use the full Engram memory toolset (14 tools) as needed; do not limit operations to a fixed subset.
 - target `engram:ddd.contexts` (topic_keys.contexts) via `mem_save` for aggregate ownership.
 - target `engram:ddd.decisions` (topic_keys.decisions) via `mem_save` for invariants and boundaries.
 - use `mem_context`/`mem_search` to load prior model constraints.

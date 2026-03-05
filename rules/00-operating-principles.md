@@ -29,6 +29,16 @@ Define hard team-wide policies for DDD analysis execution.
    - Execute work in defined stage order unless config mode states otherwise.
    - Do not skip mandatory stage deliverables or quality gates.
 
+7. Orchestrator boundary
+   - The orchestrator coordinates stage flow, validation, and delegation only.
+   - The orchestrator must not perform specialist analysis assigned to sub-agents.
+   - The orchestrator must not load unused skills, unused MCP tools, or unrelated searches.
+
+8. Mandatory tooling integration
+   - `todowrite`, `todoread`, and `question` are mandatory when their trigger conditions apply.
+   - For broad repository updates, prefer multi-file capable tools over repetitive single-file operations.
+   - Additional tools are allowed only when justified by task needs and least-privilege principles.
+
 # Hard Policies
 
 1. Use technical-neutral English in all artifacts.

@@ -26,6 +26,7 @@ Minimum persistence duties:
 
 If `memory.backend = engram`:
 
-1. Use the 14 available Engram memory tools when needed.
-2. Do not invent custom memory APIs or parallel memory protocols.
-3. Follow configured fallback if Engram is unavailable.
+1. Use the full set of 14 available Engram memory tools when needed by the stage.
+2. Do not hard-limit usage to a fixed subset of tools if the workflow needs others.
+3. Do not invent custom memory APIs or parallel memory protocols.
+4. Follow configured fallback if Engram is unavailable.

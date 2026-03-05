@@ -47,6 +47,7 @@ Anti-scope: aggregate internals and implementation-level APIs.
 - write `artifacts/_state/open-questions.md`: unresolved context ownership and integration questions.
 
 ### B) When memory.backend=engram
+- Use the full Engram memory toolset (14 tools) as needed; do not limit operations to a fixed subset.
 - target `engram:ddd.contexts` (topic_keys.contexts) via `mem_save` for bounded contexts and map.
 - target `engram:ddd.risks` (topic_keys.risks) via `mem_save` for leakage/coupling risks.
 - use `mem_context`/`mem_search` to recover previous contract decisions.
