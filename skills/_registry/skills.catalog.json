@@ -1,0 +1,423 @@
+{
+  "$schema": "./skills.schema.json",
+  "version": "1.0.0",
+  "skills": [
+    {
+      "id": "domain-discovery",
+      "name": "Domain Discovery",
+      "description": "Discover domain language, business rules, actors, and unresolved questions from requirements for stage A1.",
+      "owner_agent": "discovery-agent",
+      "stage": "A1-discovery",
+      "artifacts_produced": [
+        {
+          "id": "A1.1",
+          "path": "artifacts/01-discovery/ubiquitous-language.md"
+        },
+        {
+          "id": "A1.2",
+          "path": "artifacts/01-discovery/domain-rules.md"
+        },
+        {
+          "id": "A1.3",
+          "path": "artifacts/01-discovery/actors-and-responsibilities.md"
+        },
+        {
+          "id": "A1.4",
+          "path": "artifacts/01-discovery/open-questions.md"
+        }
+      ],
+      "inputs": [
+        "Raw requirement statement",
+        "artifacts/00-intake/intake.md",
+        "artifacts/_state/open-questions.md"
+      ],
+      "outputs": [
+        "Ubiquitous language baseline",
+        "Domain rule set",
+        "Actor responsibility map",
+        "Discovery open questions"
+      ],
+      "memory_writes": [
+        {
+          "target": "artifacts:_state/session-log",
+          "reason": "Register stage closure and generated artifacts"
+        },
+        {
+          "target": "artifacts:_state/open-questions",
+          "reason": "Persist unresolved material ambiguities"
+        },
+        {
+          "target": "engram:ddd.glossary",
+          "reason": "Persist ubiquitous language for cross-session retrieval"
+        },
+        {
+          "target": "engram:ddd.domain",
+          "reason": "Persist validated domain signals and assumptions"
+        }
+      ],
+      "quality_gates": [
+        "All core terms have one unambiguous definition",
+        "Business rules are phrased in domain language and include source rationale",
+        "Every actor has explicit responsibility boundaries",
+        "Open questions only contain unresolved material ambiguities"
+      ],
+      "prompts": [
+        "skills/domain-discovery/prompts/discovery-analysis.prompt.md"
+      ],
+      "scripts": [],
+      "references": [
+        "skills/domain-discovery/references/index.md"
+      ],
+      "assets": [
+        "skills/domain-discovery/assets/glossary.template.md"
+      ]
+    },
+    {
+      "id": "event-storming",
+      "name": "Event Storming",
+      "description": "Model domain behavior through events, commands, hotspots, and causal chains for stage A2.",
+      "owner_agent": "event-storming-agent",
+      "stage": "A2-event-storming",
+      "artifacts_produced": [
+        {
+          "id": "A2.1",
+          "path": "artifacts/02-event-storming/event-storming.md"
+        },
+        {
+          "id": "A2.2",
+          "path": "artifacts/02-event-storming/event-catalog.md"
+        },
+        {
+          "id": "A2.3",
+          "path": "artifacts/02-event-storming/command-catalog.md"
+        },
+        {
+          "id": "A2.4",
+          "path": "artifacts/02-event-storming/hotspots.md"
+        }
+      ],
+      "inputs": [
+        "artifacts/01-discovery/ubiquitous-language.md",
+        "artifacts/01-discovery/domain-rules.md",
+        "artifacts/01-discovery/actors-and-responsibilities.md"
+      ],
+      "outputs": [
+        "Event storming narrative",
+        "Event catalog",
+        "Command catalog",
+        "Hotspot list"
+      ],
+      "memory_writes": [
+        {
+          "target": "artifacts:_state/session-log",
+          "reason": "Record event storming iteration and artifact status"
+        },
+        {
+          "target": "artifacts:_state/decisions",
+          "reason": "Persist key event and command modeling decisions"
+        },
+        {
+          "target": "engram:ddd.events",
+          "reason": "Persist event timeline and causality model"
+        },
+        {
+          "target": "engram:ddd.risks",
+          "reason": "Persist hotspots and modeling risks"
+        }
+      ],
+      "quality_gates": [
+        "Every command maps to at least one domain event",
+        "Events are named in past tense and represent business outcomes",
+        "Causal chains include actor intent and policy checks",
+        "Hotspots are prioritized with explicit risk rationale"
+      ],
+      "prompts": [
+        "skills/event-storming/prompts/event-storming-session.prompt.md"
+      ],
+      "scripts": [],
+      "references": [
+        "skills/event-storming/references/index.md"
+      ],
+      "assets": [
+        "skills/event-storming/assets/event-catalog.template.md"
+      ]
+    },
+    {
+      "id": "subdomain-analysis",
+      "name": "Subdomain Analysis",
+      "description": "Classify core, supporting, and generic subdomains and justify strategic investment for stage A3.",
+      "owner_agent": "subdomains-agent",
+      "stage": "A3-subdomains",
+      "artifacts_produced": [
+        {
+          "id": "A3.1",
+          "path": "artifacts/03-subdomains/subdomain-map.md"
+        },
+        {
+          "id": "A3.2",
+          "path": "artifacts/03-subdomains/core-domain-rationale.md"
+        },
+        {
+          "id": "A3.3",
+          "path": "artifacts/03-subdomains/build-buy-reuse.md"
+        }
+      ],
+      "inputs": [
+        "artifacts/02-event-storming/event-catalog.md",
+        "artifacts/02-event-storming/hotspots.md",
+        "artifacts/01-discovery/domain-rules.md"
+      ],
+      "outputs": [
+        "Subdomain map",
+        "Core domain rationale",
+        "Build-buy-reuse matrix"
+      ],
+      "memory_writes": [
+        {
+          "target": "artifacts:_state/session-log",
+          "reason": "Register subdomain analysis progress and outputs"
+        },
+        {
+          "target": "artifacts:_state/decisions",
+          "reason": "Persist classification tradeoffs and priority criteria"
+        },
+        {
+          "target": "engram:ddd.domain",
+          "reason": "Persist subdomain strategic positioning"
+        },
+        {
+          "target": "engram:ddd.decisions",
+          "reason": "Persist build-buy-reuse rationale"
+        }
+      ],
+      "quality_gates": [
+        "Every capability is assigned to one subdomain classification",
+        "Core domain rationale includes differentiation evidence",
+        "Build-buy-reuse decisions include constraints and assumptions",
+        "No subdomain is defined only by technical layers"
+      ],
+      "prompts": [
+        "skills/subdomain-analysis/prompts/subdomain-classification.prompt.md"
+      ],
+      "scripts": [],
+      "references": [
+        "skills/subdomain-analysis/references/index.md"
+      ],
+      "assets": [
+        "skills/subdomain-analysis/assets/subdomain-map.template.md"
+      ]
+    },
+    {
+      "id": "bounded-context-mapping",
+      "name": "Bounded Context Mapping",
+      "description": "Define bounded contexts, integration contracts, and data ownership boundaries for stage A4.",
+      "owner_agent": "contexts-agent",
+      "stage": "A4-bounded-contexts",
+      "artifacts_produced": [
+        {
+          "id": "A4.1",
+          "path": "artifacts/04-contexts/bounded-contexts.md"
+        },
+        {
+          "id": "A4.2",
+          "path": "artifacts/04-contexts/context-map.md"
+        },
+        {
+          "id": "A4.3",
+          "path": "artifacts/04-contexts/integration-contracts.md"
+        },
+        {
+          "id": "A4.4",
+          "path": "artifacts/04-contexts/data-ownership.md"
+        }
+      ],
+      "inputs": [
+        "artifacts/03-subdomains/subdomain-map.md",
+        "artifacts/03-subdomains/core-domain-rationale.md",
+        "artifacts/02-event-storming/event-catalog.md"
+      ],
+      "outputs": [
+        "Bounded contexts definition",
+        "Context map",
+        "Integration contracts",
+        "Data ownership matrix"
+      ],
+      "memory_writes": [
+        {
+          "target": "artifacts:_state/session-log",
+          "reason": "Record context mapping checkpoints and artifact generation"
+        },
+        {
+          "target": "artifacts:_state/open-questions",
+          "reason": "Register unresolved ownership and integration ambiguities"
+        },
+        {
+          "target": "engram:ddd.contexts",
+          "reason": "Persist context boundaries and relationships"
+        },
+        {
+          "target": "engram:ddd.risks",
+          "reason": "Persist context leakage and coupling risks"
+        }
+      ],
+      "quality_gates": [
+        "Every context has explicit boundary, purpose, and owner",
+        "Context map declares relationship type and direction",
+        "Integration contracts specify data, protocol, and failure handling",
+        "Data ownership defines source-of-truth per entity"
+      ],
+      "prompts": [
+        "skills/bounded-context-mapping/prompts/context-mapping.prompt.md"
+      ],
+      "scripts": [],
+      "references": [
+        "skills/bounded-context-mapping/references/index.md"
+      ],
+      "assets": [
+        "skills/bounded-context-mapping/assets/context-map.template.md"
+      ]
+    },
+    {
+      "id": "domain-modeling",
+      "name": "Domain Modeling",
+      "description": "Design tactical domain model elements and invariants by bounded context for stage A5.",
+      "owner_agent": "domain-model-agent",
+      "stage": "A5-domain-model",
+      "artifacts_produced": [
+        {
+          "id": "A5.1",
+          "path": "artifacts/05-domain-model/domain-model.md"
+        },
+        {
+          "id": "A5.2",
+          "path": "artifacts/05-domain-model/invariants.md"
+        },
+        {
+          "id": "A5.3",
+          "path": "artifacts/05-domain-model/events-by-context.md"
+        }
+      ],
+      "inputs": [
+        "artifacts/04-contexts/bounded-contexts.md",
+        "artifacts/04-contexts/context-map.md",
+        "artifacts/02-event-storming/event-catalog.md"
+      ],
+      "outputs": [
+        "Domain model structure",
+        "Invariant register",
+        "Events by context mapping"
+      ],
+      "memory_writes": [
+        {
+          "target": "artifacts:_state/session-log",
+          "reason": "Record modeling decisions and completion status"
+        },
+        {
+          "target": "artifacts:_state/decisions",
+          "reason": "Persist aggregate boundaries and transactional tradeoffs"
+        },
+        {
+          "target": "engram:ddd.contexts",
+          "reason": "Persist aggregate ownership per context"
+        },
+        {
+          "target": "engram:ddd.decisions",
+          "reason": "Persist invariant and model decisions"
+        }
+      ],
+      "quality_gates": [
+        "Aggregates are bounded by invariants and transactional consistency",
+        "Entities and value objects are distinguished by identity semantics",
+        "Invariants include validation trigger and failure policy",
+        "Events-by-context mapping has no context leakage"
+      ],
+      "prompts": [
+        "skills/domain-modeling/prompts/domain-modeling.prompt.md"
+      ],
+      "scripts": [],
+      "references": [
+        "skills/domain-modeling/references/index.md"
+      ],
+      "assets": [
+        "skills/domain-modeling/assets/domain-model.template.md"
+      ]
+    },
+    {
+      "id": "requirements-specification",
+      "name": "Requirements Specification",
+      "description": "Translate domain analysis into implementation-ready product requirements, interfaces, NFRs, ADRs, and traceability for stage A6.",
+      "owner_agent": "specification-agent",
+      "stage": "A6-specification",
+      "artifacts_produced": [
+        {
+          "id": "A6.1",
+          "path": "artifacts/06-spec/prd.md"
+        },
+        {
+          "id": "A6.2",
+          "path": "artifacts/06-spec/interfaces.md"
+        },
+        {
+          "id": "A6.3",
+          "path": "artifacts/06-spec/nfrs.md"
+        },
+        {
+          "id": "A6.4",
+          "path": "artifacts/06-spec/adrs/"
+        },
+        {
+          "id": "A6.5",
+          "path": "artifacts/06-spec/traceability.md"
+        }
+      ],
+      "inputs": [
+        "artifacts/05-domain-model/domain-model.md",
+        "artifacts/05-domain-model/invariants.md",
+        "artifacts/04-contexts/integration-contracts.md",
+        "artifacts/_state/decisions.md"
+      ],
+      "outputs": [
+        "Product requirements document",
+        "Interface specification",
+        "Non-functional requirements",
+        "ADR set with ADR-0001+.md naming",
+        "Traceability matrix"
+      ],
+      "memory_writes": [
+        {
+          "target": "artifacts:_state/session-log",
+          "reason": "Register specification stage closure and generated artifacts"
+        },
+        {
+          "target": "artifacts:_state/decisions",
+          "reason": "Persist architecture decision records and consequences"
+        },
+        {
+          "target": "engram:ddd.decisions",
+          "reason": "Persist ADR summary for cross-session retrieval"
+        },
+        {
+          "target": "engram:ddd.project",
+          "reason": "Persist requirements baseline and traceability snapshot"
+        }
+      ],
+      "quality_gates": [
+        "PRD includes testable functional requirements and acceptance criteria",
+        "Interfaces include contracts, error semantics, and ownership",
+        "NFRs are measurable with target thresholds",
+        "Traceability links requirements to model, contexts, and ADRs"
+      ],
+      "prompts": [
+        "skills/requirements-specification/prompts/specification-synthesis.prompt.md"
+      ],
+      "scripts": [],
+      "references": [
+        "skills/requirements-specification/references/index.md"
+      ],
+      "assets": [
+        "skills/requirements-specification/assets/prd.template.md",
+        "skills/requirements-specification/assets/adr.template.md"
+      ]
+    }
+  ]
+}
