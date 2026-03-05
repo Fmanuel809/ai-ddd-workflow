@@ -46,14 +46,13 @@ ai-ddd-workflow/
       skills.index.md
   agents/
     ddd-workflow-orchestrator.md
-    sub-agents/
-      domain-analyst.md
-      event-storming-facilitator.md
-      context-mapper.md
-      domain-modeler.md
-      requirements-engineer.md
-      risk-auditor.md
-      challenger.md
+    domain-analyst.md
+    event-storming-facilitator.md
+    context-mapper.md
+    domain-modeler.md
+    requirements-engineer.md
+    risk-auditor.md
+    challenger.md
   artifacts/
     00-intake/
     01-discovery/
@@ -81,6 +80,7 @@ Use scripts from `scripts/`.
 `init` copies:
 
 - `artifacts/*`
+- `rules/*`
 - `AGENTS.md`
 - `ddd-config.yml`
 
@@ -88,6 +88,7 @@ Use scripts from `scripts/`.
 
 - Resolves source files from global workflow package path (`$OPENCODE_CONFIG_DIR/ai-ddd-workflow` or default config location).
 - If project scope already has `.opencode/agents/ddd-workflow-orchestrator.md`, init exits without changes.
+- Keeps skills and skill registry in global OpenCode config; they are not copied into the project.
 
 ## OpenCode Command
 
@@ -114,9 +115,9 @@ Behavior:
 
 - `agents/ddd-workflow-orchestrator.md`
   - Reads config, rules, skill registry, and existing artifacts.
-  - Resolves stage skills from `skills/_registry/skills.index.md`.
+  - Resolves stage skills from global workflow package `skills/_registry/skills.index.md`.
   - Validates catalog integrity and gate compliance.
-  - Delegates all specialist execution to sub-agents.
+  - Delegates all specialist execution to workflow sub-agents in global config.
 
 ### Sub-agents
 

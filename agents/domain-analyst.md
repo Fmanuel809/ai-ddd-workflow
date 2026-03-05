@@ -18,7 +18,7 @@ Specialist for domain discovery and subdomain analysis.
 - `subdomain-analysis` (stage `A3-subdomains`)
 
 ## Execution Constraints
-1. Execute only assigned skill from `skills/_registry/skills.catalog.json`.
+1. Execute only assigned skill from `<workflow-root>/skills/_registry/skills.catalog.json`.
 2. Consume only declared `inputs` from skill entry.
 3. Produce only `artifacts_produced` declared by skill entry.
 4. Validate all skill `quality_gates` before returning.

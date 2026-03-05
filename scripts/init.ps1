@@ -26,7 +26,7 @@ $configDir = Get-OpenCodeConfigDir
 $sourceWorkflow = Join-Path $configDir "ai-ddd-workflow"
 
 if (-not (Test-Path $sourceWorkflow)) {
-    Write-Error "Global workflow not found at $sourceWorkflow. Install globally first with scripts/install.ps1 and choose global scope."
+    Write-Error "Global workflow not found at $sourceWorkflow. Install globally first using instructions/.opencode/install.md"
 }
 
 Copy-Item -Path (Join-Path $sourceWorkflow "AGENTS.md") -Destination (Join-Path $targetDir "AGENTS.md") -Force
@@ -38,5 +38,12 @@ if (Test-Path $targetArtifacts) {
 }
 
 Copy-Item -Path (Join-Path $sourceWorkflow "artifacts") -Destination $targetArtifacts -Recurse -Force
+
+$targetRules = Join-Path $targetDir "rules"
+if (Test-Path $targetRules) {
+    Remove-Item -Path $targetRules -Recurse -Force
+}
+
+Copy-Item -Path (Join-Path $sourceWorkflow "rules") -Destination $targetRules -Recurse -Force
 
 Write-Host "Initialized DDD workflow structure at $targetDir"

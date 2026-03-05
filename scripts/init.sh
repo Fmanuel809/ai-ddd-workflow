@@ -30,7 +30,7 @@ SOURCE_WORKFLOW="$CONFIG_DIR/ai-ddd-workflow"
 
 if [[ ! -d "$SOURCE_WORKFLOW" ]]; then
   echo "Global workflow not found at $SOURCE_WORKFLOW"
-  echo "Install globally first with scripts/install.sh and choose global scope."
+  echo "Install globally first using instructions/.opencode/install.md"
   exit 1
 fi
 
@@ -42,5 +42,11 @@ if [[ -d "$TARGET_DIR/artifacts" ]]; then
 fi
 
 cp -R "$SOURCE_WORKFLOW/artifacts" "$TARGET_DIR/artifacts"
+
+if [[ -d "$TARGET_DIR/rules" ]]; then
+  rm -rf "$TARGET_DIR/rules"
+fi
+
+cp -R "$SOURCE_WORKFLOW/rules" "$TARGET_DIR/rules"
 
 echo "Initialized DDD workflow structure at $TARGET_DIR"

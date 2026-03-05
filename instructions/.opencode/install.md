@@ -29,21 +29,30 @@ New-Item -ItemType Directory -Path $env:OPENCODE_CONFIG_DIR -Force | Out-Null
 Set-Location $env:OPENCODE_CONFIG_DIR
 ```
 
-## 2) Clone the workflow repository
+## 2) Clone or update the workflow repository
 
 ### Linux/macOS (bash)
 
 ```bash
-git clone https://github.com/Fmanuel809/ai-ddd-workflow.git
+if [ -d "$OPENCODE_CONFIG_DIR/ai-ddd-workflow/.git" ]; then
+  git -C "$OPENCODE_CONFIG_DIR/ai-ddd-workflow" pull --ff-only
+else
+  git clone https://github.com/Fmanuel809/ai-ddd-workflow.git
+fi
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-git clone https://github.com/Fmanuel809/ai-ddd-workflow.git
+$repoPath = Join-Path $env:OPENCODE_CONFIG_DIR "ai-ddd-workflow"
+if (Test-Path -LiteralPath (Join-Path $repoPath ".git")) {
+  git -C $repoPath pull --ff-only
+} else {
+  git clone https://github.com/Fmanuel809/ai-ddd-workflow.git
+}
 ```
 
-## 3) Merge workflow folders into OpenCode (`commands/`, `skills/`, `agents/`, `rules/`)
+## 3) Merge workflow folders into OpenCode (`commands/`, `skills/`, `agents/`)
 
 Do not use symbolic links.
 
@@ -51,12 +60,13 @@ Use merge-copy behavior:
 - Keep existing OpenCode content that is not part of this workflow.
 - Replace files with the same path/name when this workflow provides them.
 - Do not delete unrelated files/folders already present in your OpenCode config.
+- `rules/` is intentionally not copied here; it is copied to the project root during `/ddd-init`.
 
 ### Linux/macOS (bash)
 
 ```bash
 repo_root="$OPENCODE_CONFIG_DIR/ai-ddd-workflow"
-for section in commands skills agents rules; do
+for section in commands skills agents; do
   src_dir="$repo_root/$section"
   dst_dir="$OPENCODE_CONFIG_DIR/$section"
   mkdir -p "$dst_dir"
@@ -70,7 +80,7 @@ done
 
 ```powershell
 $repoRoot = Join-Path $env:OPENCODE_CONFIG_DIR "ai-ddd-workflow"
-$sections = @("commands", "skills", "agents", "rules")
+$sections = @("commands", "skills", "agents")
 foreach ($section in $sections) {
   $srcDir = Join-Path $repoRoot $section
   $dstDir = Join-Path $env:OPENCODE_CONFIG_DIR $section
