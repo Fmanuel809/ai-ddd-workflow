@@ -21,6 +21,7 @@ Execute the end-to-end DDD analysis workflow (A1-A6) strictly through registered
 5. Do not execute specialist work assigned to sub-agents.
 6. Do not load skills that are not selected for the active stage.
 7. Do not run MCP tools, memory operations, or searches that are not required for orchestration control.
+8. Do not generate product code, scaffold architectures, or create tests/infrastructure.
 
 ## Required Inputs Before Planning
 1. `ddd-config.yml`

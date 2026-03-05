@@ -39,6 +39,10 @@ Define hard team-wide policies for DDD analysis execution.
    - For broad repository updates, prefer multi-file capable tools over repetitive single-file operations.
    - Additional tools are allowed only when justified by task needs and least-privilege principles.
 
+9. Analysis-only boundary
+   - Produce domain analysis and design artifacts only.
+   - Do not perform product implementation, scaffolding, test authoring, or deployment setup.
+
 # Hard Policies
 
 1. Use technical-neutral English in all artifacts.
@@ -74,3 +78,8 @@ Define hard team-wide policies for DDD analysis execution.
    - No contradictions between artifacts.
    - No conflicting information across artifacts.
    - No outdated information across artifacts.
+
+8. Hard stop on implementation work.
+   - No generating or editing product source code.
+   - No architecture scaffolding, framework setup, or template generation.
+   - No writing automated tests, CI/CD, or infrastructure manifests.

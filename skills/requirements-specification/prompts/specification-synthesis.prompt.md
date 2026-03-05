@@ -1,7 +1,9 @@
 # Specification Synthesis Prompt
 
 ## Intent
-Generate implementation-ready specification artifacts for stage A6-specification.
+Generate implementation-planning specification artifacts for stage A6-specification.
+
+Hard boundary: do not generate code, scaffolds, tests, CI/CD definitions, or infrastructure manifests.
 
 ## Required Inputs
 - `artifacts/05-domain-model/domain-model.md`

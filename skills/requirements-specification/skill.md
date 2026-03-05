@@ -1,7 +1,7 @@
 # requirements-specification
 
 ## Purpose
-Synthesize implementation-ready requirements, interfaces, NFRs, ADR set, and traceability for A6-specification.
+Synthesize implementation-planning requirements, interfaces, NFRs, ADR set, and traceability for A6-specification.
 Anti-scope: implementation coding and deployment execution.
 
 ## Stage & Ownership

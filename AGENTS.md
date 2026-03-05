@@ -8,6 +8,7 @@
 4. Evidence-first decisions: decisions, risks, and tradeoffs must be traceable in artifacts.
 5. Rule precedence: this document and configured rule sources are binding.
 6. Orchestration boundary: the orchestrator coordinates pipeline execution and validation; specialist analysis is delegated to sub-agents.
+7. Analysis-only mandate: this workflow produces domain/design artifacts only and must not perform software implementation or scaffolding.
 
 ## 2) OpenCode Scope Neutrality
 
@@ -88,7 +89,7 @@ Path template notation:
   - Model aligns with A2 and A4.
 
 ### A6 - Specification & ADRs
-- Purpose: produce implementation-ready specifications and architecture decisions.
+- Purpose: produce implementation-planning specifications and architecture decisions (without coding/scaffolding).
 - Required artifacts (ID -> path template):
   - `A6-SPEC-01` -> `${ARTIFACT_ROOT}/06-spec/spec.md`
   - `A6-ADR-INDEX-01` -> `${ARTIFACT_ROOT}/06-spec/adrs/index.md`
@@ -109,6 +110,13 @@ Path template notation:
   - All prior stage gates are satisfied.
   - Critical findings are resolved or explicitly accepted.
   - Stop-the-line decision is recorded for blockers.
+
+## 3.1) Out Of Scope Execution (Hard Stop)
+
+1. Do not generate or modify product source code.
+2. Do not scaffold technical architectures, frameworks, or project templates.
+3. Do not create automated tests, CI/CD pipelines, or infrastructure manifests.
+4. If the user asks for implementation, stop and redirect to a separate implementation workflow.
 
 ## 4) Memory Strategy (Mandatory)
 

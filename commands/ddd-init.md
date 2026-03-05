@@ -33,3 +33,4 @@ Initialize the DDD workflow in the current project directory.
 ## Constraints
 - Do not run ad-hoc analysis outside the workflow conventions.
 - Do not modify files other than initialization targets and `AGENTS.md` context section.
+- Do not generate code, scaffolds, tests, or infrastructure from this command.

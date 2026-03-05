@@ -6,12 +6,19 @@ AI agent-driven workflow for Domain-Driven Design (DDD) requirement analysis in 
 
 This repository defines a multi-agent system that executes DDD analysis through strict stages, registered skills, hard rules, and configurable memory backends.
 
+## Scope Boundary (Critical)
+
+- This workflow is for domain analysis and software design only.
+- It does not implement product code, scaffold architectures, generate test suites, or execute deployment tasks.
+- Output must remain in DDD artifacts (discovery, events, subdomains, contexts, domain model, specs, ADRs, review).
+
 ## Core Principles
 
 - Skill-only execution: no ad-hoc analysis outside registered skills.
 - Orchestrator boundary: `ddd-workflow-orchestrator` coordinates only; specialist work is delegated.
 - Stage gates: progression stops when quality gates fail.
 - Artifact-first outputs: work is valid only when persisted in stage artifacts.
+- Analysis-only mandate: no coding/scaffolding actions are allowed in this workflow.
 - Token discipline: minimal operational output.
 
 ## Workflow Stages
@@ -99,6 +106,7 @@ Behavior:
 - Runs OS-specific init script from global workflow package.
 - Initializes `AGENTS.md`, `ddd-config.yml`, and `artifacts/*` in current project.
 - If idea context is provided, updates `AGENTS.md` `Project Context` section through brainstorming flow.
+- Keeps execution strictly in analysis/design mode (no coding or scaffolding output).
 
 ## Agent System
 
