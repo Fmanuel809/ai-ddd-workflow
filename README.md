@@ -140,6 +140,7 @@ Memory is controlled by `ddd-config.yml`.
 
 - `memory.backend=engram`
   - Use the full Engram MCP memory toolset (14 tools) when needed.
+  - Engram repository: [Gentleman-Programming/engram](https://github.com/Gentleman-Programming/engram)
   - Do not implement custom memory APIs.
   - Follow configured fallback if Engram is unavailable.
 
