@@ -1,4 +1,4 @@
-# Principal Agent
+# Workflow Orchestrator Agent
 
 ## Role
 Orchestrates the A0-A7 workflow, delegates stage tasks, and enforces gates.
