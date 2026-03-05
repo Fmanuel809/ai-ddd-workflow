@@ -1,6 +1,6 @@
 # Install AI DDD Workflow in OpenCode
 
-This guide installs the workflow into your global OpenCode configuration by cloning this repository and linking (preferred) or copying items inside `commands/`, `skills/`, and `agents/`.
+This guide installs the workflow into your global OpenCode configuration by cloning this repository and merging workflow content into existing OpenCode folders.
 
 ## Prerequisites
 
@@ -43,47 +43,26 @@ git clone https://github.com/Fmanuel809/ai-ddd-workflow.git
 git clone https://github.com/Fmanuel809/ai-ddd-workflow.git
 ```
 
-## 3) Link items inside `commands/`, `skills/`, and `agents/` (preferred), fallback to copy
+## 3) Merge workflow folders into OpenCode (`commands/`, `skills/`, `agents/`, `rules/`)
 
-Do not replace existing top-level directories in your OpenCode config. Create links only for the entries inside each directory.
+Do not use symbolic links.
 
-Symlinks keep your OpenCode config synced with repository updates while preserving existing content.
+Use merge-copy behavior:
+- Keep existing OpenCode content that is not part of this workflow.
+- Replace files with the same path/name when this workflow provides them.
+- Do not delete unrelated files/folders already present in your OpenCode config.
 
 ### Linux/macOS (bash)
 
 ```bash
 repo_root="$OPENCODE_CONFIG_DIR/ai-ddd-workflow"
-for section in commands skills agents; do
+for section in commands skills agents rules; do
   src_dir="$repo_root/$section"
   dst_dir="$OPENCODE_CONFIG_DIR/$section"
   mkdir -p "$dst_dir"
-  for src in "$src_dir"/*; do
-    [ -e "$src" ] || continue
-    name="$(basename "$src")"
-    dst="$dst_dir/$name"
-    if [ ! -e "$dst" ] && [ ! -L "$dst" ]; then
-      ln -s "$src" "$dst"
-    fi
-  done
-done
-```
-
-If symlinks are not allowed:
-
-```bash
-repo_root="$OPENCODE_CONFIG_DIR/ai-ddd-workflow"
-for section in commands skills agents; do
-  src_dir="$repo_root/$section"
-  dst_dir="$OPENCODE_CONFIG_DIR/$section"
-  mkdir -p "$dst_dir"
-  for src in "$src_dir"/*; do
-    [ -e "$src" ] || continue
-    name="$(basename "$src")"
-    dst="$dst_dir/$name"
-    if [ ! -e "$dst" ] && [ ! -L "$dst" ]; then
-      cp -R "$src" "$dst"
-    fi
-  done
+  if [ -d "$src_dir" ]; then
+    cp -R "$src_dir"/. "$dst_dir"/
+  fi
 done
 ```
 
@@ -91,34 +70,13 @@ done
 
 ```powershell
 $repoRoot = Join-Path $env:OPENCODE_CONFIG_DIR "ai-ddd-workflow"
-$sections = @("commands", "skills", "agents")
+$sections = @("commands", "skills", "agents", "rules")
 foreach ($section in $sections) {
   $srcDir = Join-Path $repoRoot $section
   $dstDir = Join-Path $env:OPENCODE_CONFIG_DIR $section
   New-Item -ItemType Directory -Path $dstDir -Force | Out-Null
-  Get-ChildItem -LiteralPath $srcDir | ForEach-Object {
-    $dst = Join-Path $dstDir $_.Name
-    if (-not (Test-Path -LiteralPath $dst)) {
-      New-Item -ItemType SymbolicLink -Path $dst -Target $_.FullName | Out-Null
-    }
-  }
-}
-```
-
-If symlinks are not allowed:
-
-```powershell
-$repoRoot = Join-Path $env:OPENCODE_CONFIG_DIR "ai-ddd-workflow"
-$sections = @("commands", "skills", "agents")
-foreach ($section in $sections) {
-  $srcDir = Join-Path $repoRoot $section
-  $dstDir = Join-Path $env:OPENCODE_CONFIG_DIR $section
-  New-Item -ItemType Directory -Path $dstDir -Force | Out-Null
-  Get-ChildItem -LiteralPath $srcDir | ForEach-Object {
-    $dst = Join-Path $dstDir $_.Name
-    if (-not (Test-Path -LiteralPath $dst)) {
-      Copy-Item -LiteralPath $_.FullName -Destination $dst -Recurse -Force
-    }
+  if (Test-Path -LiteralPath $srcDir) {
+    Copy-Item -Path (Join-Path $srcDir "*") -Destination $dstDir -Recurse -Force
   }
 }
 ```
