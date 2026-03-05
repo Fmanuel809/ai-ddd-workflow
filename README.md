@@ -88,6 +88,12 @@ Use the custom command:
 
 - `/ddd-init [optional idea context]`
 
+Prompt to trigger installation instructions:
+
+```
+Read and follow these instructions: https://github.com/Gentleman-Programming/ai-ddd-workflow/blob/main/instructions/.opencode/install.md
+```
+
 Behavior:
 
 - Runs OS-specific init script from global workflow package.
