@@ -1,7 +1,6 @@
 ---
 description: Orchestrates the DDD analysis pipeline from A1 to A6 using only registered skills, enforcing gates, memory policy, and challenger stop-the-line controls.
 mode: primary
-model: openai/gpt-5.3-codex
 temperature: 0.1
 tools:
   write: true

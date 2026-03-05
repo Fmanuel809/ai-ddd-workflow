@@ -1,7 +1,6 @@
 ---
 description: Executes tactical domain modeling through the registered skill and enforces invariant-centered aggregate boundaries.
 mode: subagent
-model: openai/gpt-5.3-codex
 temperature: 0.1
 tools:
   write: true

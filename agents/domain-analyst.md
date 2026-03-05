@@ -1,7 +1,6 @@
 ---
 description: Executes domain discovery and subdomain analysis stages strictly through registered skills and emits only declared artifacts.
 mode: subagent
-model: openai/gpt-5.3-codex
 temperature: 0.1
 tools:
   write: true

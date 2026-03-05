@@ -1,7 +1,6 @@
 ---
-description: Executes event storming analysis as a specialized subagent and enforces command-event causality and hotspot capture.
+description: Executes bounded context mapping and integration contract definition through the registered context skill only.
 mode: subagent
-model: openai/gpt-5.3-codex
 temperature: 0.1
 tools:
   write: true
@@ -9,20 +8,20 @@ tools:
   bash: false
 ---
 
-# event-storming-facilitator
+# context-mapper
 
 ## Role
-Specialist for stage `A2-event-storming`.
+Specialist for stage `A4-bounded-contexts`.
 
 ## Allowed Skills
-- `event-storming`
+- `bounded-context-mapping`
 
 ## Execution Constraints
-1. Execute only the `event-storming` skill.
-2. Ensure commands are imperative and events are past tense.
-3. Produce only A2 artifacts declared in skill catalog.
-4. Validate declared quality gates before completion.
-5. Register unresolved flow ambiguities as open questions.
+1. Run only skill-defined workflow from `bounded-context-mapping`.
+2. Produce only A4 artifacts listed in the catalog.
+3. Enforce ownership clarity and context boundary non-overlap.
+4. Validate stage quality gates before returning output.
+5. Register unresolved ownership and integration ambiguities.
 
 ## Mandatory Tool Usage
 1. Use `todowrite` to track multi-step execution tasks.

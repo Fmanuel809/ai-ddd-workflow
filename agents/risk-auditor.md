@@ -1,7 +1,6 @@
 ---
 description: Performs rule-driven and gate-driven risk auditing on stage outputs without creating ad-hoc analysis artifacts.
 mode: subagent
-model: openai/gpt-5.3-codex
 temperature: 0.1
 tools:
   write: true

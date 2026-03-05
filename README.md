@@ -82,6 +82,18 @@ Use scripts from `scripts/`.
 - Resolves source files from global workflow package path (`$OPENCODE_CONFIG_DIR/ai-ddd-workflow` or default config location).
 - If project scope already has `.opencode/agents/ddd-workflow-orchestrator.md`, init exits without changes.
 
+## OpenCode Command
+
+Use the custom command:
+
+- `/ddd-init [optional idea context]`
+
+Behavior:
+
+- Runs OS-specific init script from global workflow package.
+- Initializes `AGENTS.md`, `ddd-config.yml`, and `artifacts/*` in current project.
+- If idea context is provided, updates `AGENTS.md` `Project Context` section through brainstorming flow.
+
 ## Agent System
 
 ### Orchestrator
