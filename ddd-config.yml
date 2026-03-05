@@ -67,3 +67,5 @@ stages:
 # --- artifacts layout (paths) ---
 artifacts:
   root: "artifacts"
+  language: "english"
+  

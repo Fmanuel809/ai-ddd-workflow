@@ -1,23 +1,144 @@
-# Agent Topology
+# AGENTS.md - DDD Team Single Source of Truth
 
-## Principal
-- `agents/principal-agent.md`
+## 1) Operating Philosophy
 
-## Sub-agents
-- `agents/sub-agents/intake-agent.md`
-- `agents/sub-agents/discovery-agent.md`
-- `agents/sub-agents/event-storming-agent.md`
-- `agents/sub-agents/subdomains-agent.md`
-- `agents/sub-agents/contexts-agent.md`
-- `agents/sub-agents/domain-model-agent.md`
-- `agents/sub-agents/specification-agent.md`
-- `agents/sub-agents/review-agent.md`
+1. Non-complacent execution: agents do not rubber-stamp assumptions.
+2. Material ambiguity policy: if ambiguity can change architecture, scope, risk, cost, or acceptance criteria, pause and ask focused questions.
+3. Challenger authority: challenger/review has stop-the-line authority and can block progression.
+4. Evidence-first decisions: decisions, risks, and tradeoffs must be traceable in artifacts.
+5. Rule precedence: this document and configured rule sources are binding.
 
-## Rules
-- All agents must follow files under `rules/`.
+## 2) OpenCode Scope Neutrality
 
-## Skills
-- Skills are registered in `skills/_registry/`.
+1. This specification is scope-neutral: agents and skills can be resolved from project scope or global scope.
+2. Project scope examples: `.opencode/agents/`, `.opencode/skills/`.
+3. Global scope examples: `~/.config/opencode/agents/`, `~/.config/opencode/skills/`.
+4. References in this document use logical IDs and path templates, not hard-coded physical locations for agents/skills.
 
-## Artifacts
-- Stage outputs are written under `artifacts/` using A0-A7 flow.
+## 3) Stages & Deliverables (A0-A7)
+
+Path template notation:
+- `${ARTIFACT_ROOT}` is resolved from `ddd-config.yml` (`artifacts.root`).
+
+### A0 - Intake
+- Purpose: establish objective, scope boundaries, constraints, stakeholders, and success criteria.
+- Required artifacts (ID -> path template):
+  - `A0-INTAKE-01` -> `${ARTIFACT_ROOT}/00-intake/intake.md`
+  - `A0-QUESTIONS-01` -> `${ARTIFACT_ROOT}/_state/open-questions.md`
+- Owner agent (logical): `intake-agent`
+- Quality gates (Definition of Done):
+  - Problem statement is explicit and testable.
+  - In/out of scope is documented.
+  - Material unknowns are logged.
+
+### A1 - Discovery
+- Purpose: build shared domain understanding and ubiquitous language baseline.
+- Required artifacts (ID -> path template):
+  - `A1-DISCOVERY-01` -> `${ARTIFACT_ROOT}/01-discovery/discovery.md`
+  - `A1-GLOSSARY-01` -> `${ARTIFACT_ROOT}/01-discovery/glossary.md`
+- Owner agent (logical): `discovery-agent`
+- Quality gates (Definition of Done):
+  - Domain signals and assumptions are explicit.
+  - Glossary terms are unambiguous.
+  - Output is consistent with A0 scope.
+
+### A2 - Event Storming
+- Purpose: model domain behavior through events, commands, actors, and invariants.
+- Required artifacts (ID -> path template):
+  - `A2-EVENTS-01` -> `${ARTIFACT_ROOT}/02-event-storming/events.md`
+  - `A2-TIMELINE-01` -> `${ARTIFACT_ROOT}/02-event-storming/timeline.md`
+- Owner agent (logical): `event-storming-agent`
+- Quality gates (Definition of Done):
+  - Critical flows are represented end-to-end.
+  - Commands and events are causally coherent.
+  - Key invariants are identified.
+
+### A3 - Subdomains
+- Purpose: classify subdomains and identify strategic differentiation.
+- Required artifacts (ID -> path template):
+  - `A3-SUBDOMAINS-01` -> `${ARTIFACT_ROOT}/03-subdomains/subdomains.md`
+  - `A3-PRIORITY-01` -> `${ARTIFACT_ROOT}/03-subdomains/prioritization.md`
+- Owner agent (logical): `subdomains-agent`
+- Quality gates (Definition of Done):
+  - Core/supporting/generic classification is justified.
+  - Strategic priorities are explicit.
+  - Dependencies are identified.
+
+### A4 - Bounded Contexts
+- Purpose: define bounded contexts, boundaries, and integration relationships.
+- Required artifacts (ID -> path template):
+  - `A4-CONTEXT-MAP-01` -> `${ARTIFACT_ROOT}/04-contexts/context-map.md`
+  - `A4-INTEGRATION-01` -> `${ARTIFACT_ROOT}/04-contexts/integration-contracts.md`
+- Owner agent (logical): `contexts-agent`
+- Quality gates (Definition of Done):
+  - Boundaries are clear and non-overlapping.
+  - Upstream/downstream relationships are documented.
+  - Integration patterns are explicit.
+
+### A5 - Domain Model
+- Purpose: define tactical DDD model for selected bounded contexts.
+- Required artifacts (ID -> path template):
+  - `A5-DOMAIN-MODEL-01` -> `${ARTIFACT_ROOT}/05-domain-model/domain-model.md`
+  - `A5-RULES-01` -> `${ARTIFACT_ROOT}/05-domain-model/business-rules.md`
+- Owner agent (logical): `domain-model-agent`
+- Quality gates (Definition of Done):
+  - Aggregates, entities, and value objects are consistent.
+  - Invariants and transaction boundaries are explicit.
+  - Model aligns with A2 and A4.
+
+### A6 - Specification & ADRs
+- Purpose: produce implementation-ready specifications and architecture decisions.
+- Required artifacts (ID -> path template):
+  - `A6-SPEC-01` -> `${ARTIFACT_ROOT}/06-spec/spec.md`
+  - `A6-ADR-INDEX-01` -> `${ARTIFACT_ROOT}/06-spec/adrs/index.md`
+  - `A6-ADR-*` -> `${ARTIFACT_ROOT}/06-spec/adrs/*.md`
+- Owner agent (logical): `specification-agent`
+- Quality gates (Definition of Done):
+  - Functional and non-functional requirements are testable.
+  - Acceptance criteria are explicit.
+  - ADRs include context, decision, alternatives, and consequences.
+
+### A7 - Review (Challenger)
+- Purpose: verify cross-stage coherence, quality, and readiness.
+- Required artifacts (ID -> path template):
+  - `A7-REVIEW-01` -> `${ARTIFACT_ROOT}/07-review/review.md`
+  - `A7-READINESS-01` -> `${ARTIFACT_ROOT}/07-review/readiness.md`
+- Owner agent (logical): `review-agent`
+- Quality gates (Definition of Done):
+  - All prior stage gates are satisfied.
+  - Critical findings are resolved or explicitly accepted.
+  - Stop-the-line decision is recorded for blockers.
+
+## 4) Memory Strategy (Mandatory)
+
+1. `ddd-config.yml` must be read before stage execution.
+2. Behavior is driven by `memory.backend`:
+   - `backend=artifacts`:
+     - Persist state/memory in `${ARTIFACT_ROOT}/_state/*`.
+     - Use configured state files.
+   - `backend=engram`:
+     - Use Engram MCP tools only: 14 available tools.
+     - Do not implement custom memory APIs.
+3. If Engram is unavailable, apply `memory.fallback.if_engram_unavailable` from config.
+
+## 5) Skill Registry Protocol
+
+1. Every new skill must be registered in the active skill catalog for the selected scope.
+2. Project-scope default catalog: `skills/_registry/skills.catalog.json`.
+3. If using global scope, registry must follow the global OpenCode skill location/conventions.
+4. Any registry change that affects ownership, stage mapping, or governance must be reflected in this file.
+
+## 6) Token Discipline
+
+1. Enforce artifact-only-output when configured.
+2. Keep explanations minimal and operational.
+3. Prefer concise structured deliverables over narrative text.
+
+## 7) Artifact Language Policy
+
+1. All artifacts are English by default.
+2. Exception: explicit user request or project language policy in `ddd-config.yml`.
+
+## 8) Response Language Policy
+
+1. Agent responses must match user language.
