@@ -6,7 +6,7 @@ Anti-scope: subdomain strategy, bounded context contracts, and implementation ar
 
 ## Stage & Ownership
 - stage: `A2-event-storming`
-- owner_agent: `event-storming-agent`
+- owner_agent: `event-storming-facilitator`
 - handoffs:
   - consumes: A1 artifacts (`ubiquitous-language.md`, `domain-rules.md`, `actors-and-responsibilities.md`)
   - delivers: `event-storming.md`, `event-catalog.md`, `command-catalog.md`, `hotspots.md`
@@ -29,7 +29,7 @@ Anti-scope: subdomain strategy, bounded context contracts, and implementation ar
 3. Derive events in past tense and map causality.
 4. Capture policies and invariants per transition.
 5. Identify hotspots (ambiguity, coupling, high-risk transitions).
-6. Stop point: unresolved causal links or policy conflicts become questions in `hotspots.md` and `_state/open-questions.md`.
+6. Stop point: unresolved causal links or policy conflicts become questions in `hotspots.md`; if blocking, ask grouped decisions with the OpenCode `question` tool.
 
 ## Quality Gates (Definition of Done)
 - Every command maps to at least one domain event.

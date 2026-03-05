@@ -50,14 +50,14 @@ memory:
 # --- stages & required artifacts (canon A0–A7) ---
 stages:
   enabled:
-    - intake
-    - discovery
-    - event_storming
-    - subdomains
-    - bounded_contexts
-    - domain_model
-    - specification
-    - review
+    - A0-intake
+    - A1-discovery
+    - A2-event-storming
+    - A3-subdomains
+    - A4-bounded-contexts
+    - A5-domain-model
+    - A6-specification
+    - A7-review
 
   gates:
     enforce_quality_gates: true

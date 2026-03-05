@@ -26,8 +26,8 @@ Technical reviewer focused on inconsistency detection, artifact integrity, and t
 
 ## Mandatory Tool Usage
 1. Use `todowrite` to track multi-step audit tasks.
-2. Use `todoread` before task transitions and before completion.
-3. Use `question` when material ambiguity blocks a valid audit verdict.
+2. Use `question` when material ambiguity blocks a valid audit verdict.
+3. Use `context7` (`resolve-library-id` + `query-docs`) before asking user questions about OpenCode tool behavior.
 4. Use additional tools only when required by active stage audit scope.
 5. Prefer multi-file capable tools for broad read/write operations.
 

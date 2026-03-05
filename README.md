@@ -23,12 +23,14 @@ This repository defines a multi-agent system that executes DDD analysis through 
 
 ## Workflow Stages
 
+- `A0-intake`
 - `A1-discovery`
 - `A2-event-storming`
 - `A3-subdomains`
 - `A4-bounded-contexts`
 - `A5-domain-model`
 - `A6-specification`
+- `A7-review`
 
 Stage definitions, required artifacts, and governance are defined in `AGENTS.md`.
 
@@ -121,10 +123,12 @@ Behavior:
 ### Sub-agents
 
 - `domain-analyst` -> `domain-discovery`, `subdomain-analysis`
+- `intake-agent` -> `intake-analysis`
 - `event-storming-facilitator` -> `event-storming`
 - `context-mapper` -> `bounded-context-mapping`
 - `domain-modeler` -> `domain-modeling`
 - `requirements-engineer` -> `requirements-specification`
+- `review-agent` -> `review-and-readiness`
 - `risk-auditor` -> cross-stage technical and traceability review
 - `challenger` -> stop-the-line authority for critical blockers
 
@@ -155,6 +159,7 @@ Memory is controlled by `ddd-config.yml`.
 - `memory.backend=engram`
   - Use the full Engram MCP memory toolset (14 tools) when needed.
   - Engram repository: [Gentleman-Programming/engram](https://github.com/Gentleman-Programming/engram)
+  - Do not write `artifacts/_state/*` while Engram backend is active (except configured fallback).
   - Do not implement custom memory APIs.
   - Follow configured fallback if Engram is unavailable.
 
@@ -163,8 +168,8 @@ Memory is controlled by `ddd-config.yml`.
 Mandatory when trigger conditions apply:
 
 - `todowrite`
-- `todoread`
 - `question`
+- `context7` (`resolve-library-id` + `query-docs`) for OpenCode tool-behavior clarifications
 
 Other OpenCode tools are allowed as needed.
 Prefer high-efficiency tools that can process multiple files in one operation for broad updates.

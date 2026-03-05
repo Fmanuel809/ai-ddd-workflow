@@ -20,6 +20,7 @@ Hard boundary: do not generate code, scaffolds, tests, CI/CD definitions, or inf
 
 ## Questions Policy
 Ask only when acceptance criteria, ownership, interfaces, or measurable NFR targets are undefined.
+Use the OpenCode `question` tool for blocking decisions.
 
 ## Token Discipline
 Output only artifact markdown and ADR documents.

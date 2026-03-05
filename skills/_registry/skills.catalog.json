@@ -3,10 +3,66 @@
   "version": "1.0.0",
   "skills": [
     {
+      "id": "intake-analysis",
+      "name": "Intake Analysis",
+      "description": "Capture objective, scope, constraints, and material unknowns for stage A0.",
+      "owner_agent": "intake-agent",
+      "stage": "A0-intake",
+      "artifacts_produced": [
+        {
+          "id": "A0.1",
+          "path": "artifacts/00-intake/intake.md"
+        },
+        {
+          "id": "A0.2",
+          "path": "artifacts/_state/open-questions.md"
+        }
+      ],
+      "inputs": [
+        "Raw requirement statement",
+        "User constraints",
+        "artifacts/_state/open-questions.md"
+      ],
+      "outputs": [
+        "Intake baseline",
+        "Prioritized open questions"
+      ],
+      "memory_writes": [
+        {
+          "target": "artifacts:_state/session-log",
+          "reason": "When backend=artifacts, register intake stage closure"
+        },
+        {
+          "target": "artifacts:_state/open-questions",
+          "reason": "When backend=artifacts, persist unresolved intake ambiguities"
+        },
+        {
+          "target": "engram:ddd.project",
+          "reason": "When backend=engram, persist intake objective and scope boundaries"
+        },
+        {
+          "target": "engram:ddd.session",
+          "reason": "When backend=engram, persist intake stage checkpoint"
+        }
+      ],
+      "quality_gates": [
+        "Problem statement is explicit and testable",
+        "In-scope and out-of-scope boundaries are documented",
+        "Constraints and assumptions are explicit",
+        "Material unknowns are captured as open questions"
+      ],
+      "prompts": [
+        "skills/intake-analysis/prompts/intake-capture.prompt.md"
+      ],
+      "scripts": [],
+      "references": [],
+      "assets": []
+    },
+    {
       "id": "domain-discovery",
       "name": "Domain Discovery",
       "description": "Discover domain language, business rules, actors, and unresolved questions from requirements for stage A1.",
-      "owner_agent": "discovery-agent",
+      "owner_agent": "domain-analyst",
       "stage": "A1-discovery",
       "artifacts_produced": [
         {
@@ -76,7 +132,7 @@
       "id": "event-storming",
       "name": "Event Storming",
       "description": "Model domain behavior through events, commands, hotspots, and causal chains for stage A2.",
-      "owner_agent": "event-storming-agent",
+      "owner_agent": "event-storming-facilitator",
       "stage": "A2-event-storming",
       "artifacts_produced": [
         {
@@ -146,7 +202,7 @@
       "id": "subdomain-analysis",
       "name": "Subdomain Analysis",
       "description": "Classify core, supporting, and generic subdomains and justify strategic investment for stage A3.",
-      "owner_agent": "subdomains-agent",
+      "owner_agent": "domain-analyst",
       "stage": "A3-subdomains",
       "artifacts_produced": [
         {
@@ -211,7 +267,7 @@
       "id": "bounded-context-mapping",
       "name": "Bounded Context Mapping",
       "description": "Define bounded contexts, integration contracts, and data ownership boundaries for stage A4.",
-      "owner_agent": "contexts-agent",
+      "owner_agent": "context-mapper",
       "stage": "A4-bounded-contexts",
       "artifacts_produced": [
         {
@@ -281,7 +337,7 @@
       "id": "domain-modeling",
       "name": "Domain Modeling",
       "description": "Design tactical domain model elements and invariants by bounded context for stage A5.",
-      "owner_agent": "domain-model-agent",
+      "owner_agent": "domain-modeler",
       "stage": "A5-domain-model",
       "artifacts_produced": [
         {
@@ -346,7 +402,7 @@
       "id": "requirements-specification",
       "name": "Requirements Specification",
       "description": "Translate domain analysis into implementation-ready product requirements, interfaces, NFRs, ADRs, and traceability for stage A6.",
-      "owner_agent": "specification-agent",
+      "owner_agent": "requirements-engineer",
       "stage": "A6-specification",
       "artifacts_produced": [
         {
@@ -418,6 +474,67 @@
         "skills/requirements-specification/assets/prd.template.md",
         "skills/requirements-specification/assets/adr.template.md"
       ]
+    },
+    {
+      "id": "review-and-readiness",
+      "name": "Review and Readiness",
+      "description": "Execute cross-stage validation and readiness decision for stage A7.",
+      "owner_agent": "review-agent",
+      "stage": "A7-review",
+      "artifacts_produced": [
+        {
+          "id": "A7.1",
+          "path": "artifacts/07-review/review.md"
+        },
+        {
+          "id": "A7.2",
+          "path": "artifacts/07-review/readiness.md"
+        }
+      ],
+      "inputs": [
+        "artifacts/00-intake/intake.md",
+        "artifacts/01-discovery/ubiquitous-language.md",
+        "artifacts/01-discovery/domain-rules.md",
+        "artifacts/02-event-storming/event-catalog.md",
+        "artifacts/03-subdomains/subdomain-map.md",
+        "artifacts/04-contexts/context-map.md",
+        "artifacts/05-domain-model/domain-model.md",
+        "artifacts/06-spec/traceability.md",
+        "artifacts/_state/open-questions.md"
+      ],
+      "outputs": [
+        "Cross-stage review report",
+        "Readiness decision"
+      ],
+      "memory_writes": [
+        {
+          "target": "artifacts:_state/session-log",
+          "reason": "When backend=artifacts, register final review and readiness status"
+        },
+        {
+          "target": "artifacts:_state/decisions",
+          "reason": "When backend=artifacts, persist accepted risks and blockers"
+        },
+        {
+          "target": "engram:ddd.decisions",
+          "reason": "When backend=engram, persist readiness decision and accepted trade-offs"
+        },
+        {
+          "target": "engram:ddd.risks",
+          "reason": "When backend=engram, persist unresolved blockers"
+        }
+      ],
+      "quality_gates": [
+        "All prior stage gates are evaluated",
+        "Critical findings are resolved or explicitly accepted",
+        "Readiness decision includes blockers and rationale"
+      ],
+      "prompts": [
+        "skills/review-and-readiness/prompts/review-check.prompt.md"
+      ],
+      "scripts": [],
+      "references": [],
+      "assets": []
     }
   ]
 }

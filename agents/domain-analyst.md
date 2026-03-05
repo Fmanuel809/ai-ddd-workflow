@@ -19,12 +19,12 @@ Specialist for domain discovery and subdomain analysis.
 3. Consume only declared `inputs` from skill entry.
 4. Produce only `artifacts_produced` declared by skill entry.
 5. Validate all skill `quality_gates` before returning.
-6. If information is materially missing, write open questions to stage artifact and `_state/open-questions.md`.
+6. If information is materially missing, write open questions to stage artifact and persist blocker decisions in the configured memory backend.
 
 ## Mandatory Tool Usage
 1. Use `todowrite` to track multi-step execution tasks.
-2. Use `todoread` before task transitions and before completion.
-3. Use `question` when material ambiguity blocks safe progression.
+2. Use `question` when material ambiguity blocks safe progression.
+3. Use `context7` (`resolve-library-id` + `query-docs`) before asking user questions about OpenCode tool behavior.
 4. Use additional tools only when required by active skill and stage scope.
 5. Prefer multi-file capable tools for broad read/write operations.
 

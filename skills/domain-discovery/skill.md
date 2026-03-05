@@ -6,7 +6,7 @@ Anti-scope: implementation design, bounded context design, and technology choice
 
 ## Stage & Ownership
 - stage: `A1-discovery`
-- owner_agent: `discovery-agent`
+- owner_agent: `domain-analyst`
 - handoffs:
   - consumes: `artifacts/00-intake/intake.md`, `artifacts/_state/open-questions.md`, raw requirement input
   - delivers: `artifacts/01-discovery/ubiquitous-language.md`, `artifacts/01-discovery/domain-rules.md`, `artifacts/01-discovery/actors-and-responsibilities.md`, `artifacts/01-discovery/open-questions.md`
@@ -28,9 +28,9 @@ Anti-scope: implementation design, bounded context design, and technology choice
 2. Extract candidate domain terms and normalize synonyms.
 3. Extract explicit and implicit business rules with sources.
 4. Identify actors and responsibility boundaries.
-5. Detect material ambiguities and append them to A1.4 and `_state/open-questions.md`.
+5. Detect material ambiguities and append them to A1.4.
 6. Validate consistency across A1.1-A1.4.
-7. Stop point: if any critical rule conflict exists, stop and register blocking questions in A1.4.
+7. Stop point: if any critical rule conflict exists, stop and collect user decisions with the OpenCode `question` tool.
 
 ## Quality Gates (Definition of Done)
 - All core terms have one unambiguous definition.

@@ -22,8 +22,8 @@ Specialist for stage `A6-specification`.
 
 ## Mandatory Tool Usage
 1. Use `todowrite` to track multi-step execution tasks.
-2. Use `todoread` before task transitions and before completion.
-3. Use `question` when material ambiguity blocks safe progression.
+2. Use `question` when material ambiguity blocks safe progression.
+3. Use `context7` (`resolve-library-id` + `query-docs`) before asking user questions about OpenCode tool behavior.
 4. Use additional tools only when required by active skill and stage scope.
 5. Prefer multi-file capable tools for broad read/write operations.
 

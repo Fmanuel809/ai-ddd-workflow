@@ -16,6 +16,7 @@ Produce bounded context boundaries, context map relationships, integration contr
 
 ## Questions Policy
 Ask only for unresolved ownership, relationship direction, or contract semantics that materially affect boundaries.
+Use the OpenCode `question` tool for blocking decisions.
 
 ## Token Discipline
 Produce only artifact content in markdown format.

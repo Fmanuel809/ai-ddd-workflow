@@ -15,7 +15,8 @@ Generate domain event flows, command mappings, and hotspot analysis for stage A2
 - `A2.4` -> `artifacts/02-event-storming/hotspots.md`
 
 ## Questions Policy
-Ask only for missing causal links, undefined policies, or ambiguous state transitions. Batch questions by flow.
+Ask only for missing causal links, undefined policies, or ambiguous state transitions.
+Batch questions by flow and collect decisions using the OpenCode `question` tool.
 
 ## Token Discipline
 Return only artifact-ready markdown sections.

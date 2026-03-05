@@ -35,7 +35,8 @@ Define hard team-wide policies for DDD analysis execution.
    - The orchestrator must not load unused skills, unused MCP tools, or unrelated searches.
 
 8. Mandatory tooling integration
-   - `todowrite`, `todoread`, and `question` are mandatory when their trigger conditions apply.
+   - `todowrite` and `question` are mandatory when their trigger conditions apply.
+   - `context7` lookup (`resolve-library-id` + `query-docs`) is mandatory before escalating OpenCode tool-behavior ambiguities to the user.
    - For broad repository updates, prefer multi-file capable tools over repetitive single-file operations.
    - Additional tools are allowed only when justified by task needs and least-privilege principles.
 

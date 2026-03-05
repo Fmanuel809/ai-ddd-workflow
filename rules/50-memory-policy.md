@@ -34,3 +34,4 @@ If `memory.backend = engram`:
 6. Do not hard-limit usage to a fixed subset of tools if the workflow needs others.
 7. Do not invent custom memory APIs or parallel memory protocols.
 8. Follow configured fallback if Engram is unavailable.
+9. Do not write state to `artifacts/_state/*` when `memory.backend=engram` unless fallback is triggered.

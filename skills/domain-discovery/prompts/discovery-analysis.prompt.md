@@ -15,7 +15,8 @@ Extract ubiquitous language, domain rules, actors, and material open questions f
 - `A1.4` -> `artifacts/01-discovery/open-questions.md`
 
 ## Questions Policy
-Ask only for material ambiguities that change scope, business behavior, ownership, or acceptance criteria. Group and prioritize questions before writing A1.4.
+Ask only for material ambiguities that change scope, business behavior, ownership, or acceptance criteria.
+Group and prioritize questions, then collect decisions using the OpenCode `question` tool.
 
 ## Token Discipline
 Respond with artifact content only. No narrative outside artifact sections.

@@ -6,7 +6,7 @@ Anti-scope: UI/API implementation details and deployment architecture.
 
 ## Stage & Ownership
 - stage: `A5-domain-model`
-- owner_agent: `domain-model-agent`
+- owner_agent: `domain-modeler`
 - handoffs:
   - consumes: A4 context artifacts and A2 event catalog
   - delivers: `domain-model.md`, `invariants.md`, `events-by-context.md`

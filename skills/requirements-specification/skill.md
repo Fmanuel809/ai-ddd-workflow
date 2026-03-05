@@ -6,7 +6,7 @@ Anti-scope: implementation coding and deployment execution.
 
 ## Stage & Ownership
 - stage: `A6-specification`
-- owner_agent: `specification-agent`
+- owner_agent: `requirements-engineer`
 - handoffs:
   - consumes: A5 domain model artifacts, A4 integration contracts, and decision logs
   - delivers: `prd.md`, `interfaces.md`, `nfrs.md`, `adrs/` (ADR-0001+.md), `traceability.md`
@@ -30,7 +30,7 @@ Anti-scope: implementation coding and deployment execution.
 2. Derive interface contracts from context integrations.
 3. Define measurable NFRs with target thresholds.
 4. Capture architecture decisions as ADRs (`ADR-0001+.md`).
-5. Build traceability matrix linking A1-A6 lineage.
+5. Build traceability matrix linking A0-A6 lineage.
 6. Stop point: unresolved acceptance criteria or NFR thresholds go to open questions.
 
 ## Quality Gates (Definition of Done)

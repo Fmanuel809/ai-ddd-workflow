@@ -6,7 +6,7 @@ Anti-scope: detailed context contracts and aggregate design.
 
 ## Stage & Ownership
 - stage: `A3-subdomains`
-- owner_agent: `subdomains-agent`
+- owner_agent: `domain-analyst`
 - handoffs:
   - consumes: A2 event outputs and A1 business rules
   - delivers: `subdomain-map.md`, `core-domain-rationale.md`, `build-buy-reuse.md`
@@ -28,7 +28,7 @@ Anti-scope: detailed context contracts and aggregate design.
 3. Document rationale for core differentiation.
 4. Build build-buy-reuse matrix per capability.
 5. Validate dependency map and strategic coherence.
-6. Stop point: unresolved classification conflicts go to `_state/open-questions.md`.
+6. Stop point: unresolved classification conflicts must be resolved via grouped prompts using the OpenCode `question` tool before advancing.
 
 ## Quality Gates (Definition of Done)
 - Every capability is assigned to one subdomain classification.

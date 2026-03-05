@@ -15,6 +15,7 @@ Classify capabilities into core/supporting/generic and justify strategic priorit
 
 ## Questions Policy
 Ask only when classification changes strategic scope, capability ownership, or investment priority. Group by subdomain candidate.
+Use the OpenCode `question` tool for blocking decisions.
 
 ## Token Discipline
 Emit only artifact sections and required tables.

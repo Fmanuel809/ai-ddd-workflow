@@ -54,12 +54,14 @@
         "stage": {
           "type": "string",
           "enum": [
+            "A0-intake",
             "A1-discovery",
             "A2-event-storming",
             "A3-subdomains",
             "A4-bounded-contexts",
             "A5-domain-model",
-            "A6-specification"
+            "A6-specification",
+            "A7-review"
           ]
         },
         "artifacts_produced": {

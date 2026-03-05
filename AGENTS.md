@@ -38,7 +38,7 @@ Path template notation:
 - Required artifacts (ID -> path template):
   - `A1-DISCOVERY-01` -> `${ARTIFACT_ROOT}/01-discovery/discovery.md`
   - `A1-GLOSSARY-01` -> `${ARTIFACT_ROOT}/01-discovery/glossary.md`
-- Owner agent (logical): `discovery-agent`
+- Owner agent (logical): `domain-analyst`
 - Quality gates (Definition of Done):
   - Domain signals and assumptions are explicit.
   - Glossary terms are unambiguous.
@@ -49,7 +49,7 @@ Path template notation:
 - Required artifacts (ID -> path template):
   - `A2-EVENTS-01` -> `${ARTIFACT_ROOT}/02-event-storming/events.md`
   - `A2-TIMELINE-01` -> `${ARTIFACT_ROOT}/02-event-storming/timeline.md`
-- Owner agent (logical): `event-storming-agent`
+- Owner agent (logical): `event-storming-facilitator`
 - Quality gates (Definition of Done):
   - Critical flows are represented end-to-end.
   - Commands and events are causally coherent.
@@ -60,7 +60,7 @@ Path template notation:
 - Required artifacts (ID -> path template):
   - `A3-SUBDOMAINS-01` -> `${ARTIFACT_ROOT}/03-subdomains/subdomains.md`
   - `A3-PRIORITY-01` -> `${ARTIFACT_ROOT}/03-subdomains/prioritization.md`
-- Owner agent (logical): `subdomains-agent`
+- Owner agent (logical): `domain-analyst`
 - Quality gates (Definition of Done):
   - Core/supporting/generic classification is justified.
   - Strategic priorities are explicit.
@@ -71,7 +71,7 @@ Path template notation:
 - Required artifacts (ID -> path template):
   - `A4-CONTEXT-MAP-01` -> `${ARTIFACT_ROOT}/04-contexts/context-map.md`
   - `A4-INTEGRATION-01` -> `${ARTIFACT_ROOT}/04-contexts/integration-contracts.md`
-- Owner agent (logical): `contexts-agent`
+- Owner agent (logical): `context-mapper`
 - Quality gates (Definition of Done):
   - Boundaries are clear and non-overlapping.
   - Upstream/downstream relationships are documented.
@@ -82,7 +82,7 @@ Path template notation:
 - Required artifacts (ID -> path template):
   - `A5-DOMAIN-MODEL-01` -> `${ARTIFACT_ROOT}/05-domain-model/domain-model.md`
   - `A5-RULES-01` -> `${ARTIFACT_ROOT}/05-domain-model/business-rules.md`
-- Owner agent (logical): `domain-model-agent`
+- Owner agent (logical): `domain-modeler`
 - Quality gates (Definition of Done):
   - Aggregates, entities, and value objects are consistent.
   - Invariants and transaction boundaries are explicit.
@@ -94,7 +94,7 @@ Path template notation:
   - `A6-SPEC-01` -> `${ARTIFACT_ROOT}/06-spec/spec.md`
   - `A6-ADR-INDEX-01` -> `${ARTIFACT_ROOT}/06-spec/adrs/index.md`
   - `A6-ADR-*` -> `${ARTIFACT_ROOT}/06-spec/adrs/*.md`
-- Owner agent (logical): `specification-agent`
+- Owner agent (logical): `requirements-engineer`
 - Quality gates (Definition of Done):
   - Functional and non-functional requirements are testable.
   - Acceptance criteria are explicit.
@@ -128,7 +128,8 @@ Path template notation:
    - `backend=engram`:
      - Engram memory operations are mandatory during stage execution and close-out.
      - Use the full Engram MCP memory toolset (14 tools) when required by stage execution.
-     - Do not implement custom memory APIs.
+      - Do not persist session state into `${ARTIFACT_ROOT}/_state/*` unless fallback to artifacts is active.
+      - Do not implement custom memory APIs.
 3. If Engram is unavailable, apply `memory.fallback.if_engram_unavailable` from config.
 
 ## 5) Skill Registry Protocol
@@ -166,9 +167,9 @@ Path template notation:
 
 1. Mandatory workflow tools:
    - `todowrite`: required to create/update the execution task list for multi-step work.
-   - `todoread`: required to read current task state before advancing stages.
    - `question`: required to collect user decisions when material ambiguity blocks safe progression.
-2. These three tools are mandatory across orchestrator and sub-agents when their trigger conditions apply.
+   - `context7` lookup (`resolve-library-id` + `query-docs`): required before raising tool-behavior questions that can be resolved from OpenCode documentation.
+2. These tools are mandatory across orchestrator and sub-agents when their trigger conditions apply.
 3. Other OpenCode tools are allowed when justified by task needs.
 4. Prefer high-efficiency tools that operate on multiple files in one operation when broad read/write updates are needed.
 5. Tool use must follow least-privilege and orchestration boundary rules.

@@ -15,6 +15,7 @@ Produce tactical domain model artifacts with aggregate boundaries, invariants, a
 
 ## Questions Policy
 Ask only for ambiguous invariants, aggregate ownership conflicts, or unresolved transaction boundaries.
+Use the OpenCode `question` tool for blocking decisions.
 
 ## Token Discipline
 Respond with artifact markdown only.

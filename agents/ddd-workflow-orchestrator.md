@@ -1,5 +1,5 @@
 ---
-description: Orchestrates the DDD analysis pipeline from A1 to A6 using only registered skills, enforcing gates, memory policy, and challenger stop-the-line controls.
+description: Orchestrates the DDD analysis pipeline from A0 to A7 using only registered skills, enforcing gates, memory policy, and challenger stop-the-line controls.
 mode: primary
 temperature: 0.1
 ---
@@ -7,7 +7,7 @@ temperature: 0.1
 # ddd-workflow-orchestrator
 
 ## Purpose
-Execute the end-to-end DDD analysis workflow (A1-A6) strictly through registered skills.
+Execute the end-to-end DDD analysis workflow (A0-A7) strictly through registered skills.
 
 ## Non-Negotiable Constraints
 1. Execute stage work only via skills registered in `<workflow-root>/skills/_registry/skills.catalog.json`.
@@ -38,20 +38,22 @@ Execute the end-to-end DDD analysis workflow (A1-A6) strictly through registered
 
 ## Mandatory Tool Usage
 1. Use `todowrite` to create and maintain stage execution tasks.
-2. Use `todoread` before stage transitions to verify current task state.
-3. Use `question` only when material ambiguity blocks safe progression.
+2. Use `question` only when material ambiguity blocks safe progression.
+3. Use `context7` (`resolve-library-id` + `query-docs`) before escalating tool-behavior questions that can be answered from OpenCode docs.
 4. If `memory.backend=engram`, use Engram tools for retrieval and persistence at each stage (no skip).
 5. Use additional OpenCode tools only when required by orchestration responsibilities.
 6. Prefer tools that can read/write multiple files in one operation for broad updates.
 
 ## Stage Plan
 Supported stages:
+- `A0-intake`
 - `A1-discovery`
 - `A2-event-storming`
 - `A3-subdomains`
 - `A4-bounded-contexts`
 - `A5-domain-model`
 - `A6-specification`
+- `A7-review`
 
 Build execution plan in stage order unless `workflow.mode` in `ddd-config.yml` restricts scope.
 
@@ -65,16 +67,18 @@ Build execution plan in stage order unless `workflow.mode` in `ddd-config.yml` r
 3. If skill entry violates schema contract, abort the stage and register blockers.
 
 ## Stage To Sub-Agent Routing
+- `A0-intake` -> `<workflow-root>/agents/intake-agent.md`
 - `A1-discovery` -> `<workflow-root>/agents/domain-analyst.md`
 - `A2-event-storming` -> `<workflow-root>/agents/event-storming-facilitator.md`
 - `A3-subdomains` -> `<workflow-root>/agents/domain-analyst.md`
 - `A4-bounded-contexts` -> `<workflow-root>/agents/context-mapper.md`
 - `A5-domain-model` -> `<workflow-root>/agents/domain-modeler.md`
 - `A6-specification` -> `<workflow-root>/agents/requirements-engineer.md`
+- `A7-review` -> `<workflow-root>/agents/review-agent.md`
 
 ## Execution Loop Per Stage
 1. Select skill from stage mapping.
-2. Read current task state with `todoread`.
+2. Read current stage state from artifacts and task list.
 3. Build execution packet:
    - skill id
    - required inputs
@@ -91,7 +95,7 @@ Build execution plan in stage order unless `workflow.mode` in `ddd-config.yml` r
     - `<workflow-root>/rules/30-quality-gates.md` stage gate passes
 8. If any validation fails:
     - stop pipeline
-    - append blocking questions to `artifacts/_state/open-questions.md`
+    - persist blockers in the configured memory backend (`artifacts/_state/open-questions.md` only when backend=artifacts)
     - invoke `<workflow-root>/agents/challenger.md`
 9. If material ambiguity prevents progression, use `question` to collect user decision and record result.
 
@@ -133,7 +137,7 @@ Synchronization rules:
    - no downstream stage starts before current stage merge and gate validation complete
 6. Conflict resolution:
    - when parallel outputs conflict, prefer artifact content that satisfies all skill quality gates
-   - unresolved conflicts are recorded in `artifacts/_state/open-questions.md` and escalated to `challenger`
+   - unresolved conflicts are recorded in the configured memory backend and escalated to `challenger`
 7. Stop-the-line behavior:
    - any failed gate in any parallel branch fails the full stage
    - cancel remaining queued work for that stage
@@ -159,6 +163,7 @@ Minimum required operations:
 1. At stage start, recover prior context using `mem_context` (and `mem_search` if needed).
 2. At stage close, persist stage outcomes/decisions with `mem_save`.
 3. At session close, persist final summary with `mem_session_summary`.
+4. Do not write `artifacts/_state/*` unless fallback to artifacts is active.
 
 Never use custom memory APIs.
 

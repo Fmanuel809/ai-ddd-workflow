@@ -24,6 +24,10 @@ Ask clarification questions when one or more of the following conditions exist:
 
 ## Question Handling Rules
 
+0. Tool behavior questions must be verified first
+   - Before asking the user about OpenCode tool behavior, query official docs using `context7` (`resolve-library-id` + `query-docs`).
+   - Ask the user only if ambiguity remains after documentation lookup.
+
 1. Group questions
    - Consolidate related questions into coherent batches by topic.
 
@@ -36,3 +40,4 @@ Ask clarification questions when one or more of the following conditions exist:
 
 4. Traceability
    - Record open questions in the configured state store.
+   - Use the OpenCode `question` tool for blocking decisions; do not leave blocking questions only as passive notes.

@@ -6,7 +6,7 @@ Anti-scope: aggregate internals and implementation-level APIs.
 
 ## Stage & Ownership
 - stage: `A4-bounded-contexts`
-- owner_agent: `contexts-agent`
+- owner_agent: `context-mapper`
 - handoffs:
   - consumes: A3 subdomain outputs and A2 event catalog
   - delivers: `bounded-contexts.md`, `context-map.md`, `integration-contracts.md`, `data-ownership.md`
