@@ -171,3 +171,14 @@ Rules:
 
 - Artifacts are English by default.
 - Agent responses must match the user language.
+
+## Open Source Community Files
+
+This repository includes standard community and governance files:
+
+- `LICENSE` (MIT)
+- `CONTRIBUTING.md`
+- `CODE_OF_CONDUCT.md`
+- `SECURITY.md`
+- `.github/ISSUE_TEMPLATE/*`
+- `.github/PULL_REQUEST_TEMPLATE.md`
