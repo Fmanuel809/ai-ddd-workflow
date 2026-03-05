@@ -126,6 +126,7 @@ Path template notation:
      - Persist state/memory in `${ARTIFACT_ROOT}/_state/*`.
      - Use configured state files.
    - `backend=engram`:
+     - Engram memory operations are mandatory during stage execution and close-out.
      - Use the full Engram MCP memory toolset (14 tools) when required by stage execution.
      - Do not implement custom memory APIs.
 3. If Engram is unavailable, apply `memory.fallback.if_engram_unavailable` from config.
@@ -136,6 +137,7 @@ Path template notation:
 2. Project-scope default catalog: `skills/_registry/skills.catalog.json`.
 3. If using global scope, registry must follow the global OpenCode skill location/conventions.
 4. Any registry change that affects ownership, stage mapping, or governance must be reflected in this file.
+5. Stage and sub-agent execution is invalid unless the mapped registered skill is explicitly invoked.
 
 ## 6) Token Discipline
 

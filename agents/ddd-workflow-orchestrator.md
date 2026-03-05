@@ -2,10 +2,6 @@
 description: Orchestrates the DDD analysis pipeline from A1 to A6 using only registered skills, enforcing gates, memory policy, and challenger stop-the-line controls.
 mode: primary
 temperature: 0.1
-tools:
-  write: true
-  edit: true
-  bash: true
 ---
 
 # ddd-workflow-orchestrator
@@ -22,6 +18,7 @@ Execute the end-to-end DDD analysis workflow (A1-A6) strictly through registered
 6. Do not load skills that are not selected for the active stage.
 7. Do not run MCP tools, memory operations, or searches that are not required for orchestration control.
 8. Do not generate product code, scaffold architectures, or create tests/infrastructure.
+9. Do not accept or merge stage outputs unless the mapped skill was explicitly invoked.
 
 ## Required Inputs Before Planning
 1. Resolve workflow package root with this priority:
@@ -43,8 +40,9 @@ Execute the end-to-end DDD analysis workflow (A1-A6) strictly through registered
 1. Use `todowrite` to create and maintain stage execution tasks.
 2. Use `todoread` before stage transitions to verify current task state.
 3. Use `question` only when material ambiguity blocks safe progression.
-4. Use additional OpenCode tools only when required by orchestration responsibilities.
-5. Prefer tools that can read/write multiple files in one operation for broad updates.
+4. If `memory.backend=engram`, use Engram tools for retrieval and persistence at each stage (no skip).
+5. Use additional OpenCode tools only when required by orchestration responsibilities.
+6. Prefer tools that can read/write multiple files in one operation for broad updates.
 
 ## Stage Plan
 Supported stages:
@@ -83,9 +81,10 @@ Build execution plan in stage order unless `workflow.mode` in `ddd-config.yml` r
    - expected artifacts
    - quality gates
 4. Update task list with `todowrite`.
-5. Dispatch execution to assigned sub-agent.
+5. Dispatch execution packet that includes explicit mapped skill invocation requirement.
 6. Wait for artifact outputs.
 7. Validate:
+   - mapped skill invocation evidence is present
    - declared artifacts produced
    - no undeclared artifacts produced
    - all skill quality gates pass
@@ -155,6 +154,11 @@ Use the full Engram MCP memory toolset (14 tools) when needed by orchestration:
 - prompt capture
 - passive capture
 - summaries and close-out
+
+Minimum required operations:
+1. At stage start, recover prior context using `mem_context` (and `mem_search` if needed).
+2. At stage close, persist stage outcomes/decisions with `mem_save`.
+3. At session close, persist final summary with `mem_session_summary`.
 
 Never use custom memory APIs.
 

@@ -80,7 +80,6 @@ Use scripts from `scripts/`.
 `init` copies:
 
 - `artifacts/*`
-- `rules/*`
 - `AGENTS.md`
 - `ddd-config.yml`
 

@@ -2,10 +2,6 @@
 description: Executes requirements specification synthesis and ADR packaging strictly through the registered A6 skill.
 mode: subagent
 temperature: 0.1
-tools:
-  write: true
-  edit: true
-  bash: false
 ---
 
 # requirements-engineer
@@ -18,10 +14,11 @@ Specialist for stage `A6-specification`.
 
 ## Execution Constraints
 1. Execute only `requirements-specification` from catalog.
-2. Produce only A6 artifacts declared by skill.
-3. Use ADR naming convention `ADR-0001+.md`.
-4. Validate all quality gates before completion.
-5. Register unresolved acceptance or NFR ambiguities.
+2. Explicitly invoke `requirements-specification` before producing any artifact output.
+3. Produce only A6 artifacts declared by skill.
+4. Use ADR naming convention `ADR-0001+.md`.
+5. Validate all quality gates before completion.
+6. Register unresolved acceptance or NFR ambiguities.
 
 ## Mandatory Tool Usage
 1. Use `todowrite` to track multi-step execution tasks.

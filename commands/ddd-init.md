@@ -16,7 +16,6 @@ Initialize the DDD workflow in the current project directory.
 2. Confirm the package contains:
    - `scripts/init.sh`
    - `scripts/init.ps1`
-   - `rules/`
 3. Detect current shell family and run the matching init script against the current project path:
    - POSIX shells (`bash`, `zsh`, `sh`, including Git Bash/WSL): `bash "<workflow-root>/scripts/init.sh" "$PWD"`
    - PowerShell shells (`powershell`, `pwsh`): `powershell.exe -NoProfile -ExecutionPolicy Bypass -File "<workflow-root>/scripts/init.ps1" (Get-Location).Path`
@@ -32,7 +31,7 @@ Initialize the DDD workflow in the current project directory.
      - `Open Questions`
 5. Keep output minimal: report only initialization result and whether `AGENTS.md` context was updated.
 6. Scope placement rule:
-   - Project gets analysis assets (`artifacts/`, `rules/`, `AGENTS.md`, `ddd-config.yml`).
+   - Project gets analysis assets (`artifacts/`, `AGENTS.md`, `ddd-config.yml`).
    - Skills, skills registry, and workflow agents remain in global OpenCode config.
 
 ## Constraints

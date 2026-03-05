@@ -43,6 +43,10 @@ Define hard team-wide policies for DDD analysis execution.
    - Produce domain analysis and design artifacts only.
    - Do not perform product implementation, scaffolding, test authoring, or deployment setup.
 
+10. Skill-contract execution
+   - Every stage must explicitly invoke its mapped registered skill before producing outputs.
+   - Any output produced without skill invocation is invalid.
+
 # Hard Policies
 
 1. Use technical-neutral English in all artifacts.
@@ -83,3 +87,7 @@ Define hard team-wide policies for DDD analysis execution.
    - No generating or editing product source code.
    - No architecture scaffolding, framework setup, or template generation.
    - No writing automated tests, CI/CD, or infrastructure manifests.
+
+9. Hard stop on unregistered execution.
+   - No stage execution without explicit invocation of mapped registered skill.
+   - No artifact acceptance if skill invocation evidence is missing.

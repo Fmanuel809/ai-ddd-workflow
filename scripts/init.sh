@@ -43,10 +43,4 @@ fi
 
 cp -R "$SOURCE_WORKFLOW/artifacts" "$TARGET_DIR/artifacts"
 
-if [[ -d "$TARGET_DIR/rules" ]]; then
-  rm -rf "$TARGET_DIR/rules"
-fi
-
-cp -R "$SOURCE_WORKFLOW/rules" "$TARGET_DIR/rules"
-
 echo "Initialized DDD workflow structure at $TARGET_DIR"

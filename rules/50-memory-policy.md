@@ -26,7 +26,11 @@ Minimum persistence duties:
 
 If `memory.backend = engram`:
 
-1. Use the full set of 14 available Engram memory tools when needed by the stage.
-2. Do not hard-limit usage to a fixed subset of tools if the workflow needs others.
-3. Do not invent custom memory APIs or parallel memory protocols.
-4. Follow configured fallback if Engram is unavailable.
+1. Engram usage is mandatory for stage execution and close-out; do not skip memory operations.
+2. At stage start, recover context with `mem_context` (and `mem_search` if needed).
+3. At stage close, persist outcomes/decisions with `mem_save`.
+4. At session close, persist summary with `mem_session_summary`.
+5. Use the full set of 14 available Engram memory tools when required by the workflow.
+6. Do not hard-limit usage to a fixed subset of tools if the workflow needs others.
+7. Do not invent custom memory APIs or parallel memory protocols.
+8. Follow configured fallback if Engram is unavailable.

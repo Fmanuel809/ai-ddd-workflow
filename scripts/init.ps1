@@ -39,11 +39,4 @@ if (Test-Path $targetArtifacts) {
 
 Copy-Item -Path (Join-Path $sourceWorkflow "artifacts") -Destination $targetArtifacts -Recurse -Force
 
-$targetRules = Join-Path $targetDir "rules"
-if (Test-Path $targetRules) {
-    Remove-Item -Path $targetRules -Recurse -Force
-}
-
-Copy-Item -Path (Join-Path $sourceWorkflow "rules") -Destination $targetRules -Recurse -Force
-
 Write-Host "Initialized DDD workflow structure at $targetDir"

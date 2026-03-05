@@ -2,10 +2,6 @@
 description: Executes bounded context mapping and integration contract definition through the registered context skill only.
 mode: subagent
 temperature: 0.1
-tools:
-  write: true
-  edit: true
-  bash: false
 ---
 
 # context-mapper
@@ -18,10 +14,11 @@ Specialist for stage `A4-bounded-contexts`.
 
 ## Execution Constraints
 1. Run only skill-defined workflow from `bounded-context-mapping`.
-2. Produce only A4 artifacts listed in the catalog.
-3. Enforce ownership clarity and context boundary non-overlap.
-4. Validate stage quality gates before returning output.
-5. Register unresolved ownership and integration ambiguities.
+2. Explicitly invoke `bounded-context-mapping` before producing any artifact output.
+3. Produce only A4 artifacts listed in the catalog.
+4. Enforce ownership clarity and context boundary non-overlap.
+5. Validate stage quality gates before returning output.
+6. Register unresolved ownership and integration ambiguities.
 
 ## Mandatory Tool Usage
 1. Use `todowrite` to track multi-step execution tasks.

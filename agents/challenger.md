@@ -2,10 +2,6 @@
 description: Provides critical challenge review with stop-the-line authority for semantic conflicts, assumption risks, and unresolved ambiguity.
 mode: subagent
 temperature: 0.1
-tools:
-  write: true
-  edit: true
-  bash: false
 ---
 
 # challenger
@@ -24,6 +20,7 @@ Critical agent with authority to block stages A1-A6.
 2. Failed quality gates with unresolved blockers.
 3. Contradictory definitions across stage artifacts.
 4. Missing required artifacts for active stage.
+5. Missing evidence that the mapped registered skill was explicitly invoked.
 
 ## Blocking Output
 When blocking, produce:
