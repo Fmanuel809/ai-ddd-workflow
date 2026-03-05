@@ -1,0 +1,69 @@
+version: 1
+
+# --- output discipline ---
+verbosity:
+  explanations: minimal          # minimal | standard | verbose
+  artifact_only_output: true     # si true: solo artifacts + preguntas/material gaps
+  suppress_agent_chatter: true
+
+# --- pipeline control ---
+workflow:
+  mode: full                     # full | discovery-only | contexts-only | spec-only
+  auto_progress: true            # avanza si gates cumplen
+  stop_on_material_ambiguity: true
+  challenger_review: true
+  parallel_agents: true
+  max_parallel_tasks: 3
+
+# --- memory strategy (DECISIÓN CLAVE) ---
+memory:
+  backend: artifacts             # artifacts | engram
+
+  # session state (episódico) + semantic memory (decisiones/conocimiento)
+  session_state:
+    enabled: true
+
+  artifacts:
+    state_dir: "artifacts/_state"
+    session_log: "session-log.md"
+    decisions_log: "decisions.md"
+    questions_log: "open-questions.md"
+
+  engram:
+    enabled: false               # se activa automáticamente cuando backend=engram
+    # Engram es accesible vía MCP tools (mem_save/mem_context/mem_search/...) :contentReference[oaicite:3]{index=3}
+    topic_keys:
+      project: "ddd.project"
+      domain: "ddd.domain"
+      decisions: "ddd.decisions"
+      glossary: "ddd.glossary"
+      events: "ddd.events"
+      contexts: "ddd.contexts"
+      risks: "ddd.risks"
+      session: "ddd.session"
+    write_policy:
+      save_on_each_stage_close: true
+      save_session_summary_on_close: true
+    fallback:
+      if_engram_unavailable: artifacts   # artifacts | abort
+
+# --- stages & required artifacts (canon A0–A7) ---
+stages:
+  enabled:
+    - intake
+    - discovery
+    - event_storming
+    - subdomains
+    - bounded_contexts
+    - domain_model
+    - specification
+    - review
+
+  gates:
+    enforce_quality_gates: true
+    challenger_blocking: true
+    allow_partial_artifacts: false
+
+# --- artifacts layout (paths) ---
+artifacts:
+  root: "artifacts"
