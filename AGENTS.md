@@ -26,7 +26,9 @@ Path template notation:
 - Purpose: establish objective, scope boundaries, constraints, stakeholders, and success criteria.
 - Required artifacts (ID -> path template):
   - `A0-INTAKE-01` -> `${ARTIFACT_ROOT}/00-intake/intake.md`
-  - `A0-QUESTIONS-01` -> `${ARTIFACT_ROOT}/_state/open-questions.md`
+- Questions state persistence:
+  - `backend=artifacts` -> `${ARTIFACT_ROOT}/_state/open-questions.md`
+  - `backend=engram` -> persist via Engram (`mem_save`) and collect decisions with `question`
 - Owner agent (logical): `intake-agent`
 - Quality gates (Definition of Done):
   - Problem statement is explicit and testable.

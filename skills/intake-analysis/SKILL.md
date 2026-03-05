@@ -1,3 +1,9 @@
+---
+name: intake-analysis
+description: Capture A0 intake objective, scope, constraints, and material unknowns.
+compatibility: opencode
+---
+
 # intake-analysis
 
 ## Purpose
@@ -9,23 +15,23 @@ Anti-scope: deep domain modeling, event design, context mapping, and implementat
 - owner_agent: `intake-agent`
 - handoffs:
   - consumes: raw requirement statement and user context
-  - delivers: `intake.md`, `_state/open-questions.md`
+  - delivers: `intake.md`
 
 ## Inputs (Required)
 1. Raw requirement statement
 2. Any user-provided project constraints
-3. Existing `artifacts/_state/open-questions.md` (if present)
+3. Existing unresolved questions from the configured memory backend (if present)
 
 ## Outputs (Artifacts)
 - `A0.1` -> `artifacts/00-intake/intake.md` (create or update)
-- `A0.2` -> `artifacts/_state/open-questions.md` (create or update)
 
 ## Workflow (Steps)
 1. Capture problem statement and expected business outcomes.
 2. Define in-scope and out-of-scope boundaries.
 3. Capture constraints, assumptions, stakeholders, and success criteria.
 4. Detect material unknowns and write prioritized questions.
-5. If ambiguities block safe progression, ask grouped decisions through OpenCode `question` tool.
+5. If ambiguities block safe progression, ask grouped decisions through OpenCode `question` tool before closing stage.
+6. For `memory.backend=engram`, persist unresolved blockers in Engram via `mem_save` instead of `_state` files.
 
 ## Quality Gates (Definition of Done)
 - Problem statement is explicit and testable.
@@ -53,4 +59,4 @@ Anti-scope: deep domain modeling, event design, context mapping, and implementat
 - assets: N/A.
 
 ## Example Invocation (Minimal)
-Invoke `intake-analysis` with user requirement text; produce `artifacts/00-intake/intake.md` and update `artifacts/_state/open-questions.md`.
+Invoke `intake-analysis` with user requirement text; produce `artifacts/00-intake/intake.md`, trigger `question` for blocking ambiguities, and persist unresolved blockers in the configured memory backend.

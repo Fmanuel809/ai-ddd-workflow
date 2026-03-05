@@ -5,7 +5,7 @@ Run stage A7 review for cross-stage coherence, unresolved blockers, and readines
 
 ## Required Inputs
 - A0-A6 stage artifacts
-- `artifacts/_state/open-questions.md`
+- unresolved questions from configured memory backend
 
 ## Output Artifacts
 - `A7.1` -> `artifacts/07-review/review.md`

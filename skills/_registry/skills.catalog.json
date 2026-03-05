@@ -12,16 +12,12 @@
         {
           "id": "A0.1",
           "path": "artifacts/00-intake/intake.md"
-        },
-        {
-          "id": "A0.2",
-          "path": "artifacts/_state/open-questions.md"
         }
       ],
       "inputs": [
         "Raw requirement statement",
         "User constraints",
-        "artifacts/_state/open-questions.md"
+        "Unresolved questions from configured memory backend"
       ],
       "outputs": [
         "Intake baseline",
@@ -85,7 +81,7 @@
       "inputs": [
         "Raw requirement statement",
         "artifacts/00-intake/intake.md",
-        "artifacts/_state/open-questions.md"
+        "Unresolved questions from configured memory backend"
       ],
       "outputs": [
         "Ubiquitous language baseline",
@@ -500,7 +496,7 @@
         "artifacts/04-contexts/context-map.md",
         "artifacts/05-domain-model/domain-model.md",
         "artifacts/06-spec/traceability.md",
-        "artifacts/_state/open-questions.md"
+        "Unresolved questions from configured memory backend"
       ],
       "outputs": [
         "Cross-stage review report",

@@ -6,7 +6,7 @@ Extract ubiquitous language, domain rules, actors, and material open questions f
 ## Required Inputs
 - `artifacts/00-intake/intake.md`
 - raw requirement statement
-- `artifacts/_state/open-questions.md` (if exists)
+- unresolved questions from configured memory backend (if exists)
 
 ## Output Artifacts
 - `A1.1` -> `artifacts/01-discovery/ubiquitous-language.md`

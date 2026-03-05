@@ -1,3 +1,9 @@
+---
+name: domain-modeling
+description: Build A5 tactical domain model artifacts with invariants and context ownership.
+compatibility: opencode
+---
+
 # domain-modeling
 
 ## Purpose

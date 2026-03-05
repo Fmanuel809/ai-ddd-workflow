@@ -1,3 +1,9 @@
+---
+name: event-storming
+description: Build A2 event storming artifacts with commands, events, and hotspots.
+compatibility: opencode
+---
+
 # event-storming
 
 ## Purpose

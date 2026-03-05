@@ -1,3 +1,9 @@
+---
+name: requirements-specification
+description: Build A6 specification and ADR artifacts from prior DDD stages.
+compatibility: opencode
+---
+
 # requirements-specification
 
 ## Purpose

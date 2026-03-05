@@ -1,3 +1,9 @@
+---
+name: bounded-context-mapping
+description: Build A4 bounded context, integration contract, and ownership artifacts.
+compatibility: opencode
+---
+
 # bounded-context-mapping
 
 ## Purpose

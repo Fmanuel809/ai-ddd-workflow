@@ -1,3 +1,9 @@
+---
+name: review-and-readiness
+description: Execute A7 cross-stage review and readiness decision artifact generation.
+compatibility: opencode
+---
+
 # review-and-readiness
 
 ## Purpose
@@ -20,7 +26,7 @@ Anti-scope: generating new domain design artifacts beyond review outputs.
 6. `artifacts/04-contexts/context-map.md`
 7. `artifacts/05-domain-model/domain-model.md`
 8. `artifacts/06-spec/traceability.md`
-9. `artifacts/_state/open-questions.md`
+9. Unresolved questions from configured memory backend
 
 ## Outputs (Artifacts)
 - `A7.1` -> `artifacts/07-review/review.md` (create or update)

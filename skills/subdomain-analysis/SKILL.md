@@ -1,3 +1,9 @@
+---
+name: subdomain-analysis
+description: Build A3 subdomain classification and strategic prioritization artifacts.
+compatibility: opencode
+---
+
 # subdomain-analysis
 
 ## Purpose

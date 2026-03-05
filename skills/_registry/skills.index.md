@@ -2,7 +2,7 @@
 
 | Skill | Stage | Artifacts Generated | Owner Agent |
 |---|---|---|---|
-| intake-analysis | A0-intake | A0.1, A0.2 | intake-agent |
+| intake-analysis | A0-intake | A0.1 | intake-agent |
 | domain-discovery | A1-discovery | A1.1, A1.2, A1.3, A1.4 | domain-analyst |
 | event-storming | A2-event-storming | A2.1, A2.2, A2.3, A2.4 | event-storming-facilitator |
 | subdomain-analysis | A3-subdomains | A3.1, A3.2, A3.3 | domain-analyst |

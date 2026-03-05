@@ -140,6 +140,8 @@ The registry lives in `skills/_registry/`:
 - `skills.catalog.json`: active skill contracts.
 - `skills.index.md`: stage-to-skill readable index.
 
+Each OpenCode skill folder must expose `SKILL.md` (uppercase) for native discovery/loading.
+
 All new skills must be:
 
 1. Added to `skills.catalog.json`.

@@ -1,3 +1,9 @@
+---
+name: domain-discovery
+description: Build A1 discovery artifacts with glossary, rules, actors, and material ambiguities.
+compatibility: opencode
+---
+
 # domain-discovery
 
 ## Purpose
@@ -8,13 +14,13 @@ Anti-scope: implementation design, bounded context design, and technology choice
 - stage: `A1-discovery`
 - owner_agent: `domain-analyst`
 - handoffs:
-  - consumes: `artifacts/00-intake/intake.md`, `artifacts/_state/open-questions.md`, raw requirement input
+  - consumes: `artifacts/00-intake/intake.md`, unresolved questions from configured memory backend, raw requirement input
   - delivers: `artifacts/01-discovery/ubiquitous-language.md`, `artifacts/01-discovery/domain-rules.md`, `artifacts/01-discovery/actors-and-responsibilities.md`, `artifacts/01-discovery/open-questions.md`
 
 ## Inputs (Required)
 1. `artifacts/00-intake/intake.md`
 2. Raw requirement statement and user clarifications
-3. Existing `artifacts/_state/open-questions.md`
+3. Existing unresolved questions from configured memory backend
 4. Prior decisions if available in `artifacts/_state/decisions.md`
 
 ## Outputs (Artifacts)
