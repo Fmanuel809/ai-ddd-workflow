@@ -34,13 +34,13 @@ Set-Location $env:OPENCODE_CONFIG_DIR
 ### Linux/macOS (bash)
 
 ```bash
-git clone https://github.com/Gentleman-Programming/ai-ddd-workflow.git
+git clone https://github.com/Fmanuel809/ai-ddd-workflow.git
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-git clone https://github.com/Gentleman-Programming/ai-ddd-workflow.git
+git clone https://github.com/Fmanuel809/ai-ddd-workflow.git
 ```
 
 ## 3) Link `commands/`, `skills/`, and `agents/` (preferred), fallback to copy

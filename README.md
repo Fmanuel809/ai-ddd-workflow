@@ -91,7 +91,7 @@ Use the custom command:
 Prompt to trigger installation instructions:
 
 ```
-Read and follow these instructions: https://github.com/Fmanuel809/ai-ddd-workflow/blob/main/instructions/.opencode/install.md
+Read and follow these instructions: https://github.com/Fmanuel809/ai-ddd-workflow/blob/master/instructions/.opencode/install.md
 ```
 
 Behavior:
