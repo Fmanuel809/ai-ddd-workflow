@@ -161,6 +161,9 @@ Memory is controlled by `ddd-config.yml`.
 - `memory.backend=engram`
   - Use the full Engram MCP memory toolset (14 tools) when needed.
   - Engram repository: [Gentleman-Programming/engram](https://github.com/Gentleman-Programming/engram)
+  - Run one shared Engram session (`session_id`) across A0-A7 for orchestrator and sub-agents.
+  - Resolve blocking ambiguities through `question` before stage transition; persist outcomes with `mem_save`.
+  - Avoid stage question artifacts when Engram is active; persist unresolved non-blocking questions in Engram.
   - Do not write `artifacts/_state/*` while Engram backend is active (except configured fallback).
   - Do not implement custom memory APIs.
   - Follow configured fallback if Engram is unavailable.

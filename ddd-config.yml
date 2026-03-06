@@ -17,7 +17,7 @@ workflow:
 
 # --- memory strategy (DECISIÓN CLAVE) ---
 memory:
-  backend: artifacts             # artifacts | engram
+  backend: engram                # artifacts | engram
 
   # session state (episódico) + semantic memory (decisiones/conocimiento)
   session_state:
@@ -30,7 +30,10 @@ memory:
     questions_log: "open-questions.md"
 
   engram:
-    enabled: false               # se activa automáticamente cuando backend=engram
+    enabled: true                # se activa automáticamente cuando backend=engram
+    session:
+      strategy: shared-workflow  # single shared session_id for orchestrator + subagents
+      owner: orchestrator
     # Engram es accesible vía MCP tools (mem_save/mem_context/mem_search/...) :contentReference[oaicite:3]{index=3}
     topic_keys:
       project: "ddd.project"

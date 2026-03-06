@@ -97,7 +97,10 @@ Build execution plan in stage order unless `workflow.mode` in `ddd-config.yml` r
     - stop pipeline
     - persist blockers in the configured memory backend (`artifacts/_state/open-questions.md` only when backend=artifacts)
     - invoke `<workflow-root>/agents/challenger.md`
-9. If material ambiguity prevents progression, use `question` to collect user decision and record result.
+9. If `workflow.stop_on_material_ambiguity=true` and any material ambiguity remains, you MUST use `question` to collect user decision before stage close.
+10. Do not advance from A0->A1 (or any stage transition) with unresolved blocking ambiguities.
+11. Persist ambiguity resolutions in configured memory backend before continuing.
+12. If `memory.backend=engram`, retrieve unresolved blocking questions from memory (`mem_context`/`mem_search`) and batch them through OpenCode `question` prior to transition.
 
 ## Orchestrator Scope Boundary
 1. The orchestrator coordinates; sub-agents execute domain analysis.
@@ -160,17 +163,18 @@ Use the full Engram MCP memory toolset (14 tools) when needed by orchestration:
 - summaries and close-out
 
 Minimum required operations:
-1. At stage start, recover prior context using `mem_context` (and `mem_search` if needed).
-2. At stage close, persist stage outcomes/decisions with `mem_save`.
-3. At session close, persist final summary with `mem_session_summary`.
-4. Do not write `artifacts/_state/*` unless fallback to artifacts is active.
+1. At workflow start, create one shared session with `mem_session_start` and reuse the same `session_id` across A0-A7 and all sub-agents.
+2. At stage start, recover prior context using `mem_context` (and `mem_search` if needed).
+3. At stage close, persist stage outcomes/decisions with `mem_save`.
+4. Resolve blocking ambiguities with OpenCode `question` before stage transition and persist outcomes with `mem_save`.
+5. At workflow close, persist final summary with `mem_session_summary` and close with `mem_session_end`.
+6. Do not write `artifacts/_state/*` unless fallback to artifacts is active.
 
 Never use custom memory APIs.
 
 ## Output Contract
 Return only:
 1. Generated artifacts
-2. Open questions
-3. Detected risks
+2. Detected risks
 
 No extra narrative output.

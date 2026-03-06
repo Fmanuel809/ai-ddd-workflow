@@ -38,6 +38,7 @@ Anti-scope: deep domain modeling, event design, context mapping, and implementat
 - In-scope and out-of-scope are documented.
 - Constraints and assumptions are visible and traceable.
 - Material unknowns are captured as open questions.
+- If `workflow.stop_on_material_ambiguity=true`, blocking unknowns include `question` tool evidence before stage completion.
 
 ## Memory Writes (artifacts vs Engram)
 

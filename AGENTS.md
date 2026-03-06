@@ -26,9 +26,6 @@ Path template notation:
 - Purpose: establish objective, scope boundaries, constraints, stakeholders, and success criteria.
 - Required artifacts (ID -> path template):
   - `A0-INTAKE-01` -> `${ARTIFACT_ROOT}/00-intake/intake.md`
-- Questions state persistence:
-  - `backend=artifacts` -> `${ARTIFACT_ROOT}/_state/open-questions.md`
-  - `backend=engram` -> persist via Engram (`mem_save`) and collect decisions with `question`
 - Owner agent (logical): `intake-agent`
 - Quality gates (Definition of Done):
   - Problem statement is explicit and testable.
@@ -38,8 +35,9 @@ Path template notation:
 ### A1 - Discovery
 - Purpose: build shared domain understanding and ubiquitous language baseline.
 - Required artifacts (ID -> path template):
-  - `A1-DISCOVERY-01` -> `${ARTIFACT_ROOT}/01-discovery/discovery.md`
-  - `A1-GLOSSARY-01` -> `${ARTIFACT_ROOT}/01-discovery/glossary.md`
+  - `A1-UBIQUITOUS-LANGUAGE-01` -> `${ARTIFACT_ROOT}/01-discovery/ubiquitous-language.md`
+  - `A1-DOMAIN-RULES-01` -> `${ARTIFACT_ROOT}/01-discovery/domain-rules.md`
+  - `A1-ACTORS-01` -> `${ARTIFACT_ROOT}/01-discovery/actors-and-responsibilities.md`
 - Owner agent (logical): `domain-analyst`
 - Quality gates (Definition of Done):
   - Domain signals and assumptions are explicit.
@@ -49,8 +47,10 @@ Path template notation:
 ### A2 - Event Storming
 - Purpose: model domain behavior through events, commands, actors, and invariants.
 - Required artifacts (ID -> path template):
-  - `A2-EVENTS-01` -> `${ARTIFACT_ROOT}/02-event-storming/events.md`
-  - `A2-TIMELINE-01` -> `${ARTIFACT_ROOT}/02-event-storming/timeline.md`
+  - `A2-STORMING-01` -> `${ARTIFACT_ROOT}/02-event-storming/event-storming.md`
+  - `A2-EVENT-CATALOG-01` -> `${ARTIFACT_ROOT}/02-event-storming/event-catalog.md`
+  - `A2-COMMAND-CATALOG-01` -> `${ARTIFACT_ROOT}/02-event-storming/command-catalog.md`
+  - `A2-HOTSPOTS-01` -> `${ARTIFACT_ROOT}/02-event-storming/hotspots.md`
 - Owner agent (logical): `event-storming-facilitator`
 - Quality gates (Definition of Done):
   - Critical flows are represented end-to-end.
@@ -60,8 +60,9 @@ Path template notation:
 ### A3 - Subdomains
 - Purpose: classify subdomains and identify strategic differentiation.
 - Required artifacts (ID -> path template):
-  - `A3-SUBDOMAINS-01` -> `${ARTIFACT_ROOT}/03-subdomains/subdomains.md`
-  - `A3-PRIORITY-01` -> `${ARTIFACT_ROOT}/03-subdomains/prioritization.md`
+  - `A3-SUBDOMAIN-MAP-01` -> `${ARTIFACT_ROOT}/03-subdomains/subdomain-map.md`
+  - `A3-CORE-RATIONALE-01` -> `${ARTIFACT_ROOT}/03-subdomains/core-domain-rationale.md`
+  - `A3-BUILD-BUY-REUSE-01` -> `${ARTIFACT_ROOT}/03-subdomains/build-buy-reuse.md`
 - Owner agent (logical): `domain-analyst`
 - Quality gates (Definition of Done):
   - Core/supporting/generic classification is justified.
@@ -71,8 +72,10 @@ Path template notation:
 ### A4 - Bounded Contexts
 - Purpose: define bounded contexts, boundaries, and integration relationships.
 - Required artifacts (ID -> path template):
+  - `A4-BOUNDED-CONTEXTS-01` -> `${ARTIFACT_ROOT}/04-contexts/bounded-contexts.md`
   - `A4-CONTEXT-MAP-01` -> `${ARTIFACT_ROOT}/04-contexts/context-map.md`
   - `A4-INTEGRATION-01` -> `${ARTIFACT_ROOT}/04-contexts/integration-contracts.md`
+  - `A4-DATA-OWNERSHIP-01` -> `${ARTIFACT_ROOT}/04-contexts/data-ownership.md`
 - Owner agent (logical): `context-mapper`
 - Quality gates (Definition of Done):
   - Boundaries are clear and non-overlapping.
@@ -83,7 +86,8 @@ Path template notation:
 - Purpose: define tactical DDD model for selected bounded contexts.
 - Required artifacts (ID -> path template):
   - `A5-DOMAIN-MODEL-01` -> `${ARTIFACT_ROOT}/05-domain-model/domain-model.md`
-  - `A5-RULES-01` -> `${ARTIFACT_ROOT}/05-domain-model/business-rules.md`
+  - `A5-INVARIANTS-01` -> `${ARTIFACT_ROOT}/05-domain-model/invariants.md`
+  - `A5-EVENTS-BY-CONTEXT-01` -> `${ARTIFACT_ROOT}/05-domain-model/events-by-context.md`
 - Owner agent (logical): `domain-modeler`
 - Quality gates (Definition of Done):
   - Aggregates, entities, and value objects are consistent.
@@ -93,9 +97,11 @@ Path template notation:
 ### A6 - Specification & ADRs
 - Purpose: produce implementation-planning specifications and architecture decisions (without coding/scaffolding).
 - Required artifacts (ID -> path template):
-  - `A6-SPEC-01` -> `${ARTIFACT_ROOT}/06-spec/spec.md`
-  - `A6-ADR-INDEX-01` -> `${ARTIFACT_ROOT}/06-spec/adrs/index.md`
-  - `A6-ADR-*` -> `${ARTIFACT_ROOT}/06-spec/adrs/*.md`
+  - `A6-PRD-01` -> `${ARTIFACT_ROOT}/06-spec/prd.md`
+  - `A6-INTERFACES-01` -> `${ARTIFACT_ROOT}/06-spec/interfaces.md`
+  - `A6-NFRS-01` -> `${ARTIFACT_ROOT}/06-spec/nfrs.md`
+  - `A6-ADR-DIR-01` -> `${ARTIFACT_ROOT}/06-spec/adrs/`
+  - `A6-TRACEABILITY-01` -> `${ARTIFACT_ROOT}/06-spec/traceability.md`
 - Owner agent (logical): `requirements-engineer`
 - Quality gates (Definition of Done):
   - Functional and non-functional requirements are testable.
@@ -113,6 +119,9 @@ Path template notation:
   - Critical findings are resolved or explicitly accepted.
   - Stop-the-line decision is recorded for blockers.
 
+### Stage Definitions End
+- Stage deliverable definitions above are the only required stage artifacts for A0-A7.
+
 ## 3.1) Out Of Scope Execution (Hard Stop)
 
 1. Do not generate or modify product source code.
@@ -125,14 +134,25 @@ Path template notation:
 1. `ddd-config.yml` must be read before stage execution.
 2. Behavior is driven by `memory.backend`:
    - `backend=artifacts`:
-     - Persist state/memory in `${ARTIFACT_ROOT}/_state/*`.
-     - Use configured state files.
+      - Persist state/memory in `artifacts/_state/*`.
+      - Persist unresolved material questions in `artifacts/_state/open-questions.md`.
+      - Use configured state files.
    - `backend=engram`:
-     - Engram memory operations are mandatory during stage execution and close-out.
-     - Use the full Engram MCP memory toolset (14 tools) when required by stage execution.
-      - Do not persist session state into `${ARTIFACT_ROOT}/_state/*` unless fallback to artifacts is active.
+      - Engram memory operations are mandatory during stage execution and close-out.
+      - Use the full Engram MCP memory toolset (14 tools) when required by stage execution.
+      - Do not persist session state into `artifacts/_state/*` unless fallback to artifacts is active.
+      - Resolve blocking ambiguities through OpenCode `question` and persist results with `mem_save`.
       - Do not implement custom memory APIs.
 3. If Engram is unavailable, apply `memory.fallback.if_engram_unavailable` from config.
+4. Single-session protocol (backend=engram):
+   - Orchestrator starts one shared session with `mem_session_start` once per workflow run.
+   - Orchestrator passes the same `session_id` to all sub-agents and all stages A0-A7.
+   - Sub-agents must not open per-stage sessions.
+   - Orchestrator closes the shared session at workflow end using `mem_session_summary` and `mem_session_end`.
+5. Question-resolution protocol:
+   - Do not persist unresolved blocking questions to artifact files when backend=engram.
+   - Orchestrator must resolve material ambiguities through OpenCode `question` before stage transition.
+   - Persist resulting decisions in Engram via `mem_save`.
 
 ## 5) Skill Registry Protocol
 

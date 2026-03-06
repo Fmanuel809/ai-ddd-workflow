@@ -15,7 +15,7 @@ Anti-scope: implementation design, bounded context design, and technology choice
 - owner_agent: `domain-analyst`
 - handoffs:
   - consumes: `artifacts/00-intake/intake.md`, unresolved questions from configured memory backend, raw requirement input
-  - delivers: `artifacts/01-discovery/ubiquitous-language.md`, `artifacts/01-discovery/domain-rules.md`, `artifacts/01-discovery/actors-and-responsibilities.md`, `artifacts/01-discovery/open-questions.md`
+  - delivers: `artifacts/01-discovery/ubiquitous-language.md`, `artifacts/01-discovery/domain-rules.md`, `artifacts/01-discovery/actors-and-responsibilities.md`
 
 ## Inputs (Required)
 1. `artifacts/00-intake/intake.md`
@@ -27,22 +27,22 @@ Anti-scope: implementation design, bounded context design, and technology choice
 - `A1.1` -> `artifacts/01-discovery/ubiquitous-language.md` (create or update)
 - `A1.2` -> `artifacts/01-discovery/domain-rules.md` (create or update)
 - `A1.3` -> `artifacts/01-discovery/actors-and-responsibilities.md` (create or update)
-- `A1.4` -> `artifacts/01-discovery/open-questions.md` (create or update)
 
 ## Workflow (Steps)
 1. Parse intake objective, scope, constraints, and unknowns.
 2. Extract candidate domain terms and normalize synonyms.
 3. Extract explicit and implicit business rules with sources.
 4. Identify actors and responsibility boundaries.
-5. Detect material ambiguities and append them to A1.4.
-6. Validate consistency across A1.1-A1.4.
-7. Stop point: if any critical rule conflict exists, stop and collect user decisions with the OpenCode `question` tool.
+5. Detect material ambiguities and classify blocking vs non-blocking.
+6. Validate consistency across A1.1-A1.3.
+7. Stop point: if any blocking ambiguity exists, stop and collect user decisions with the OpenCode `question` tool before stage transition.
+8. Persist unresolved non-blocking ambiguities in the configured memory backend.
 
 ## Quality Gates (Definition of Done)
 - All core terms have one unambiguous definition.
 - Business rules are phrased in domain language and include source rationale.
 - Every actor has explicit responsibility boundaries.
-- Open questions only contain unresolved material ambiguities.
+- Material ambiguities are explicitly resolved via `question` or persisted in configured memory backend.
 - Terminology is consistent across all A1 artifacts.
 - No ambiguous requirement is silently assumed.
 
@@ -77,4 +77,4 @@ Anti-scope: implementation design, bounded context design, and technology choice
 5. Missing exception handling -> add explicit rule exceptions and preconditions.
 
 ## Example Invocation (Minimal)
-Invoke `domain-discovery` with inputs `artifacts/00-intake/intake.md` and raw requirement text; produce A1.1-A1.4 under `artifacts/01-discovery/` and register unresolved questions.
+Invoke `domain-discovery` with inputs `artifacts/00-intake/intake.md` and raw requirement text; produce A1.1-A1.3 under `artifacts/01-discovery/`, resolve blockers through `question`, and persist unresolved non-blockers in configured memory.

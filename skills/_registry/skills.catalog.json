@@ -72,10 +72,6 @@
         {
           "id": "A1.3",
           "path": "artifacts/01-discovery/actors-and-responsibilities.md"
-        },
-        {
-          "id": "A1.4",
-          "path": "artifacts/01-discovery/open-questions.md"
         }
       ],
       "inputs": [
@@ -86,8 +82,7 @@
       "outputs": [
         "Ubiquitous language baseline",
         "Domain rule set",
-        "Actor responsibility map",
-        "Discovery open questions"
+        "Actor responsibility map"
       ],
       "memory_writes": [
         {
@@ -111,7 +106,7 @@
         "All core terms have one unambiguous definition",
         "Business rules are phrased in domain language and include source rationale",
         "Every actor has explicit responsibility boundaries",
-        "Open questions only contain unresolved material ambiguities"
+        "Material ambiguities are explicitly resolved via question tool or persisted in configured memory backend"
       ],
       "prompts": [
         "skills/domain-discovery/prompts/discovery-analysis.prompt.md"
